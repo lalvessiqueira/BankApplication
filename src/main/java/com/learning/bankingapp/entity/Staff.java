@@ -12,15 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "staff")
-public class Staff {
+@DiscriminatorValue (value = "Staff")
+public class Staff extends User
+{
 
-    @Id
     private String staffId;
     private AccountStatus authorized;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "staff")
+   // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "staff")
     // create separate table to denote acct owner, joined by customer idCustomer
-    private List<Customer> customers;
+   // private List<Customer> customers;
 
 
 }

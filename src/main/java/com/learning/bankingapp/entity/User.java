@@ -9,13 +9,15 @@ import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 
 @Entity
+@Inheritance (strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "User_type")
 public class User {
 
     @Id
-    private String uid;
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private int uid;
     @Column(name = "username")
     private String username;
     @Column(name = "full_name")
@@ -24,9 +26,32 @@ public class User {
     private String password;
     @Column(name = "usertype")
     private Usertype usertype;
+    
+	public User(String username, String fullName, String password, Usertype usertype) {
+		super();
+		this.username = username;
+		this.fullName = fullName;
+		this.password = password;
+		this.usertype = usertype;
+	}
+    
+    /*
+    @OneToOne(cascade = CascadeType.ALL)
+    Customer customer;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    Staff staff;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    Beneficiary beneficiary;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    Admin admin;
+*/
     // security?
 //    private String secretQuestion;
 //    private String secretAnswer;
 
+    
+    
 }

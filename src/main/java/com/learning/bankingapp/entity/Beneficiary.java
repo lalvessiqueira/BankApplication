@@ -12,10 +12,10 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "beneficiaries")
+@DiscriminatorValue (value = "Beneficiary")
+public class Beneficiary  extends User
+{
 
-public class Beneficiary {
-
-    @Id
     private String beneficiaryAcctNo;
     private String beneficiaryName;
     private Date dateAdded;
@@ -25,6 +25,7 @@ public class Beneficiary {
 //    private pan: multi part/image
 //    private aarchar : multi part/ image
 
-
+    @ManyToOne
+    private Customer primary;
 
 }

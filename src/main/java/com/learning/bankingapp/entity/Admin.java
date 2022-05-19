@@ -3,6 +3,7 @@ package com.learning.bankingapp.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,9 +13,10 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class Admin {
+@DiscriminatorValue (value = "Admin")
+public class Admin extends User
+{
 
-    @Id
     private String customerId;
 
 
