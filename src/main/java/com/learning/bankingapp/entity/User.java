@@ -15,9 +15,9 @@ import javax.persistence.*;
 @DiscriminatorColumn(name = "User_type")
 public class User {
 
-    @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
-    private int uid;
+	@Id
+	@GeneratedValue (strategy = GenerationType.AUTO)
+    private long uid;
     @Column(name = "username")
     private String username;
     @Column(name = "full_name")

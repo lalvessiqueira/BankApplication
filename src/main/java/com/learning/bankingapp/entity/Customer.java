@@ -14,12 +14,13 @@ import com.learning.bankingapp.enums.Usertype;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "customers")
-@DiscriminatorValue (value = "Customer")
+@Table(name = "customers", uniqueConstraints = @UniqueConstraint(columnNames = {"customerId"} ))
+//@DiscriminatorValue (value = "Customer")
+//@PrimaryKeyJoinColumn(referencedColumnName = "uid")
 public class Customer extends User
 {
-
-	private String customerId;
+	
+	private Long customerId=null;
     private int phone;
     
 
@@ -40,10 +41,8 @@ public class Customer extends User
 //    private pan: multi part/image
 //    private aarchar : multi part/ image
 
-    public Customer(String username, String fullName, String password, Usertype usertype,String customerId, int phone) {
-		super(username, fullName, password, usertype);
-		this.customerId = customerId;
-		this.phone = phone;
+    public Customer(String username, String fullName, String password) {
+		super(username, fullName, password, Usertype.CUSTOMER);
 	}
 
    
