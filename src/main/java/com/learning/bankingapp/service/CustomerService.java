@@ -1,7 +1,10 @@
 package com.learning.bankingapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
@@ -20,6 +23,11 @@ public interface CustomerService {
 	public Beneficiary addBeneficiary(Long CustId,Beneficiary beneficiary);
 	public List<Beneficiary> getAllBeneficiary(Long CustId);
 	public void deleteBeneficiary(Long CustId,Long BenId);
+	public void transfer(ArrayList<String> list);
+	public String forgot(Long CustId, String userName);
+	public String changePassword (Long CustId,Customer customer);
+	
+	
 	
 	
 }

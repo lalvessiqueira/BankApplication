@@ -1,5 +1,6 @@
 package com.learning.bankingapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learning.bankingapp.entity.Account;
@@ -90,15 +92,32 @@ public class CustomerController {
 		
 		customerService.deleteBeneficiary(CustId,BenId);
 	
-	}
-	/*
-	@PostMapping("/{CustId}/account/{AccNo}")
-	public Account approveAccount(@PathVariable ("AccNo") Long AccNo, @PathVariable ("CustId")Long CustId, @RequestBody Account account) {
-
-		return customerService.approveAccount(CustId,AccNo,account);
-		
-	}*/
-}
+	}  
 	
+	@PostMapping("/transfer")
+	public String transfer(@RequestBody ArrayList <String>list) {
+
+		customerService.transfer(list);
+		
+		return list.get(3);
+	}
+	
+	@GetMapping("/{CustId}/{UserName}/forgot/question/answer")
+	public String forgotPassword(@PathVariable("CustId") Long CustId, @PathVariable("UserName") String userName) {
+		
+		return customerService.forgot(CustId,userName);
+		
+	}
+	
+	@PostMapping("/{CustId}/{UserName}/forgot")
+	public String changePassword(@PathVariable ("CustId") Long CustId, @RequestBody Customer customer) {
+
+			return customerService.changePassword (CustId,customer);
+		
+	}
+	
+	
+	
+}
 
 

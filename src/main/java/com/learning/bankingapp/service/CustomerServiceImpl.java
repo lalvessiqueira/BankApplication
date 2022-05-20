@@ -1,5 +1,6 @@
 package com.learning.bankingapp.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.learning.bankingapp.Repo.AccountRepo;
 import com.learning.bankingapp.Repo.BeneficiaryRepo;
 import com.learning.bankingapp.Repo.CustomerRepo;
 import com.learning.bankingapp.entity.Account;
@@ -25,6 +27,9 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private BeneficiaryRepo beneficiaryRepo;
+	
+	@Autowired
+	private AccountRepo accountRepo;
 
 	@Override
 	public void register(Customer customer) {
@@ -176,6 +181,63 @@ public class CustomerServiceImpl implements CustomerService {
 			}
 	
 	}
+
+	@Override
+	public void transfer(ArrayList<String> list) {
+		
+		Long fromAccNumber = Long.parseLong(list.get(0));
+		Long toAccNumber =  Long.parseLong(list.get(1));
+		double amount= Double.parseDouble(list.get(2));
+		
+		if(fromAccNumber!=toAccNumber) {
+		
+		Account accountTo  = accountRepo.getById(toAccNumber);
+		Account accountFrom = accountRepo.getById(fromAccNumber);
+		
+		double balance=accountFrom.getAccountBalance();
+		
+		if (balance>=amount) {
+			accountFrom.setAccountBalance(balance-amount);
+			accountTo.setAccountBalance(balance+amount);
+			
+			accountRepo.save(accountFrom);
+			accountRepo.save(accountTo);
+		}
+		}
+		
+	}
+
+	@Override
+	public String forgot(Long CustId, String userName) {
+		
+		Customer customer = customerRepo.getById(CustId);
+		
+		if(userName.equals(customer.getUsername()))
+			
+			return "Details validated";
+		
+		else 
+			return "Sorry your secret details are not matching";
+	}
+
+	@Override
+	public String changePassword(Long CustId, Customer customer1) {
+		
+		Customer customer2 = customerRepo.getById(CustId);
+		
+		if(customer2.getUsername().equals(customer1.getUsername())) {
+			
+			customer2.setPassword(customer1.getPassword());
+		
+			customerRepo.save(customer2);
+			
+			return "New password updated";
+		}
+		else 
+			return "Sorry password not updated";
+	}
+
+	
 		
 	
 	
