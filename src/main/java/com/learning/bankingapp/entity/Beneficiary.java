@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import com.learning.bankingapp.enums.AccountType;
+import com.learning.bankingapp.enums.Active;
 
 import java.util.Date;
 import java.util.List;
@@ -23,15 +24,10 @@ public class Beneficiary {
     private Long beneficiaryAcctNo;
 	private AccountType accountType;
     private String beneficiaryName;
-    private String valid;
+    private String approved="no";
     private Date dateAdded;
+    private Active active= Active.YES;
 
-
-
-//    private pan: multi part/image
-//    private aarchar : multi part/ image
-
-    @ManyToOne
-    private Customer primary;
+    private Long CustomerId;
 
 }

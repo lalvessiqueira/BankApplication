@@ -17,12 +17,12 @@ public interface CustomerService {
 	public Account createAccount(Long CustId, Account account1);
 	public Account approveAccount(Long CustId, Long AccNo,Account account);
 	public List<Account> getAllAccount(Long CustId);
-	public Optional<Customer> getCustomer(Long CustId);
-	public void updateAccount(Long CustId,Customer customer);
+	public Customer getCustomer(Long CustId);
+	public Customer updateCustomer(Long CustId,Customer customer);
 	public Account getAccount(Long CustId,Long AccNo);
 	public Beneficiary addBeneficiary(Long CustId,Beneficiary beneficiary);
 	public List<Beneficiary> getAllBeneficiary(Long CustId);
-	public void deleteBeneficiary(Long CustId,Long BenId);
+	public String deleteBeneficiary(Long CustId,Long BenId);
 	public void transfer(ArrayList<String> list);
 	public String forgot(Long CustId, String userName);
 	public String changePassword (Long CustId,Customer customer);

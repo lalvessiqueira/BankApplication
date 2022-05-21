@@ -30,9 +30,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Staff enableStaff(Staff staff1) {
 
-		Staff staff2 = staffRepo.getById(staff1.getUid());
+		Staff staff2 = staffRepo.getById(staff1.getStaffId());
 		
-//		staff2.setAuthorized(staff1.getAuthorized());
+		staff2.setStatus(staff1.getStatus());
 			
 			return staffRepo.save(staff2);
 	}

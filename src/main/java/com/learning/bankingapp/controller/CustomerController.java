@@ -42,14 +42,14 @@ public class CustomerController {
 
 		return customerService.createAccount(CustId,account);
 		
-	}
+	}//IF DONT WORK "ACCOUNT CANNOT BE CREATED"
 	
 	@PostMapping("/{CustId}/account/{AccNo}")
 	public Account approveAccount(@PathVariable ("AccNo") Long AccNo, @PathVariable ("CustId")Long CustId, @RequestBody Account account) {
 
 		return customerService.approveAccount(CustId,AccNo,account);
 		
-	}
+	}//IF DONT WORK PLEASE CHECK ACCOUNT NUMBER
 	
 	@GetMapping("/{CustId}/account")
 	public List<Account> getAllAccountByCustId(@PathVariable("CustId") Long CustId) {
@@ -57,29 +57,34 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/{CustId}")
-	public Optional<Customer> getCustomerByCustId(@PathVariable("CustId") Long CustId) {
+	public Customer getCustomerByCustId(@PathVariable("CustId") Long CustId) {
 		return customerService.getCustomer(CustId);
-	}
+	}//"SORRY CUSTOMER WITH <ID> NOT FOUND"
 	
 	@PostMapping("/{CustId}")
-	public void updateCustomer(@PathVariable ("CustId") Long CustId, @RequestBody Customer customer) {
+	public Customer updateCustomer(@PathVariable ("CustId") Long CustId, @RequestBody Customer customer) {
 
-		customerService.updateAccount(CustId,customer);
+		return customerService.updateCustomer(CustId,customer);
 		
-	}
+	}//"SORRY CUSTOMER WITH <ID> NOT FOUND"
 	
 	@GetMapping("/{CustId}/account/{AccNo}")
 	public Account getAccount(@PathVariable ("AccNo") Long AccNo, @PathVariable ("CustId")Long CustId) {
 
 		return customerService.getAccount(CustId,AccNo);
 		
-	}
+	}//"SORRY CUSTOMER WITH <ID> NOT FOUND"
 	
 	@PostMapping("/{CustId}/beneficiary")
-	public Beneficiary addBeneficiary(@PathVariable ("CustId") Long CustId, @RequestBody Beneficiary beneficiary) {
+	public String addBeneficiary(@PathVariable ("CustId") Long CustId, @RequestBody Beneficiary beneficiary) {
 
-			return customerService.addBeneficiary(CustId,beneficiary);
-		
+			Beneficiary beneficiary2 = customerService.addBeneficiary(CustId,beneficiary);
+			
+			if (beneficiary2!=null)
+				return "Beneficiary with "+beneficiary.getBeneficiaryAcctNo()+" added";
+			else
+				return
+						"Beneficiary with "+beneficiary.getBeneficiaryAcctNo()+" not added";
 	}
 	
 	@GetMapping("/{CustId}/beneficiary")
@@ -88,9 +93,9 @@ public class CustomerController {
 	}
 	
 	@DeleteMapping("/{CustId}/beneficiary/{BenId}")
-	public void deleteMobileById(@PathVariable("CustId") Long CustId,@PathVariable("BenId") Long BenId) {
+	public String deleteMobileById(@PathVariable("CustId") Long CustId,@PathVariable("BenId") Long BenId) {
 		
-		customerService.deleteBeneficiary(CustId,BenId);
+		return customerService.deleteBeneficiary(CustId,BenId);
 	
 	}  
 	

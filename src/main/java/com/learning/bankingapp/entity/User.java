@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 
 @Entity
+@Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = {"username"} ))
 @Inheritance (strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "User_type")
 public class User {

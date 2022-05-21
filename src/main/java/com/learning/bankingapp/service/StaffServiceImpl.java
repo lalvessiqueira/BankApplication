@@ -43,7 +43,7 @@ public class StaffServiceImpl implements StaffService {
 		
 		for(int i=0;i<beneficiaries.size();i++) {
 			
-			if(beneficiaries.get(i).getValid().equalsIgnoreCase("no"))
+			if(beneficiaries.get(i).getApproved().equalsIgnoreCase("no"))
 				
 				toApprove.add(beneficiaries.get(i));
 		}
@@ -58,7 +58,7 @@ public class StaffServiceImpl implements StaffService {
 		
 		Beneficiary beneficiary2 = beneficiaryRepo.getById(beneficiary1.getBId());
 		
-		beneficiary2.setValid(beneficiary1.getValid());
+		beneficiary2.setApproved(beneficiary1.getApproved());
 		
 		return beneficiaryRepo.save(beneficiary2);
 		

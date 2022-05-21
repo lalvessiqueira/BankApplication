@@ -7,6 +7,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import com.learning.bankingapp.enums.Usertype;
 
 
@@ -19,10 +22,14 @@ import com.learning.bankingapp.enums.Usertype;
 //@PrimaryKeyJoinColumn(referencedColumnName = "uid")
 public class Customer extends User
 {
-	
-	private Long customerId=null;
+	@Generated(GenerationTime.INSERT)
+	@Column(name = "customerId", columnDefinition = "serial", updatable = false)
+	private Long customerId;
     private int phone;
-    
+    private String StateID=null;
+    private Long SSN;
+    private String secretQuestion=null;
+    private String secretAnswer=null;
 
 
     @OneToMany(cascade = CascadeType.ALL) // One customer can have multiple accounts
@@ -38,15 +45,7 @@ public class Customer extends User
   //  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    // private List<Staff> staff;
 
-//    private pan: multi part/image
-//    private aarchar : multi part/ image
 
-    public Customer(String username, String fullName, String password) {
-		super(username, fullName, password, Usertype.CUSTOMER);
-	}
-
-   
-    
 
 
 }

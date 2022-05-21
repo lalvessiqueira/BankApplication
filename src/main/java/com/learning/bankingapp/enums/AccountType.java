@@ -1,5 +1,5 @@
 package com.learning.bankingapp.enums;
 
 public enum AccountType {
-    SAVINGSACCOUNT, CHECKINGACCOUNT
+    SAVINGS_ACCOUNT, CHECKING_ACCOUNT
 }

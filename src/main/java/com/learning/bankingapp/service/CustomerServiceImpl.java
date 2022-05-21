@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 import com.learning.bankingapp.Repo.AccountRepo;
 import com.learning.bankingapp.Repo.BeneficiaryRepo;
 import com.learning.bankingapp.Repo.CustomerRepo;
+import com.learning.bankingapp.Repo.TransactionRepo;
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
 import com.learning.bankingapp.entity.Customer;
+import com.learning.bankingapp.entity.Transaction;
 import com.learning.bankingapp.entity.User;
 import com.learning.bankingapp.enums.AccountType;
+import com.learning.bankingapp.enums.TransactionType;
 
 
 @Service
@@ -30,6 +33,9 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private AccountRepo accountRepo;
+	
+	@Autowired
+	private TransactionRepo transactionRepo;
 
 	@Override
 	public void register(Customer customer) {
@@ -42,13 +48,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 		Date currentDate = Calendar.getInstance().getTime();
 		
-		Customer customer = customerRepo.getById(CustId);
+		Customer customer = customerRepo.findBycustomerId(CustId);
 		Account account2= new Account();
 		
 		account2.setAccountType(account1.getAccountType());
 		account2.setAccountBalance(account1.getAccountBalance());
 		account2.setApproved(account1.getApproved());
 		account2.setDateOfCreation(currentDate);
+		account2.setCustomerId(customer.getCustomerId());
 		
 		customer.getAccounts().add(account2);
 		
@@ -60,73 +67,62 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Account approveAccount(Long CustId, Long AccNo, Account account) {
+	public Account approveAccount(Long CustId, Long AccNo, Account account1) {
 		
-		Customer customer = customerRepo.getById(CustId);
+		Account account2 = accountRepo.getById(AccNo);
 		
-		int SIZE = customer.getAccounts().size();
-		
-		for (int i =0; i<SIZE; i++) {
-		
-			if(customer.getAccounts().get(i).getAccountNumber().equals(AccNo)) {
-				customer.getAccounts().get(i).setApproved(account.getApproved());
-				customerRepo.save(customer);
-				return customer.getAccounts().get(i);
-			}
+		if (account2.getCustomerId().equals(CustId)) {
+			
+			account2.setApproved("yes");
+			return accountRepo.save(account2);
+			
 		}
-		System.out.println("Please check Account Number");
+		
 		return null;
+		
 	}
 
 	@Override
 	public List<Account> getAllAccount(Long CustId) {
 
-		Customer customer = customerRepo.getById(CustId);
+		Customer customer = customerRepo.findBycustomerId(CustId);
 		return customer.getAccounts();
 	}
 
 	@Override
-	public Optional<Customer> getCustomer(Long CustId) {
+	public Customer getCustomer(Long CustId) {
 	
-		return customerRepo.findById(CustId);
+		return customerRepo.findBycustomerId(CustId);
 	}
 
 	@Override
-	public void updateAccount(Long CustId, Customer customer1) {
+	public Customer updateCustomer(Long CustId, Customer customer1) {
 		
 		Customer customer2 = customerRepo.getById(CustId);
 	
 		customer2.setFullName(customer1.getFullName());
 		customer2.setPhone(customer1.getPhone());
+		customer2.setStateID(customer1.getStateID());
+		customer2.setSecretQuestion(customer1.getSecretQuestion());
+		customer2.setSecretAnswer(customer1.getSecretAnswer());
+		customer2.setSSN(customer1.getSSN());
 		
-		customerRepo.save(customer2);
+		return customerRepo.save(customer2);
 	
 	}
 
 	@Override
 	public Account getAccount(Long CustId, Long AccNo) {
 		
-		Customer customer = customerRepo.getById(CustId);
-		
-		int SIZE = customer.getAccounts().size();
-		
-		for (int i =0; i<SIZE; i++) {
-		
-			if(customer.getAccounts().get(i).getAccountNumber().equals(AccNo)) {
-				
-				return customer.getAccounts().get(i);
-			}
-		}
-		System.out.println("Sorry Account with "+CustId+" not found");
-		return null;
-		
+		return accountRepo.getById(AccNo);
 		
 	}
 
 	@Override
 	public Beneficiary addBeneficiary(Long CustId, Beneficiary beneficiary1) {
+		Date currentDate = Calendar.getInstance().getTime();
 		
-		Customer customer = customerRepo.getById(CustId);
+		Customer customer = customerRepo.findBycustomerId(CustId);
 		Beneficiary beneficiary2= new Beneficiary();
 		
 	    int SIZE = customer.getAccounts().size();
@@ -138,7 +134,8 @@ public class CustomerServiceImpl implements CustomerService {
 				beneficiary2.setBeneficiaryAcctNo(beneficiary1.getBeneficiaryAcctNo());
 			    beneficiary2.setAccountType(beneficiary1.getAccountType());
 			    beneficiary2.setBeneficiaryName(beneficiary1.getBeneficiaryName());
-			    beneficiary2.setValid(beneficiary1.getValid());
+			    beneficiary2.setDateAdded(currentDate);
+			    beneficiary2.setCustomerId(customer.getCustomerId());
 			    
 			    customer.getBeneficiaries().add(beneficiary2);
 			    
@@ -155,55 +152,81 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Beneficiary> getAllBeneficiary(Long CustId) {
 		
-		Customer customer = customerRepo.getById(CustId);
+		Customer customer = customerRepo.findBycustomerId(CustId);
 		return customer.getBeneficiaries();
 	}
 
 	@Override
-	public void deleteBeneficiary(Long CustId, Long BenId) {
+	public String deleteBeneficiary(Long CustId, Long BenId) {
 		
-		Customer customer = customerRepo.getById(CustId);
+		Customer customer = customerRepo.findBycustomerId(CustId);
 
 	    int SIZE = customer.getBeneficiaries().size();
 		
 		for (int i =0; i<SIZE; i++) {
-			
-			System.out.println(customer.getBeneficiaries().get(i).getBId());
-			System.out.println(BenId);
-			
+		
 			if(customer.getBeneficiaries().get(i).getBId()==BenId) {
 				
 				customer.getBeneficiaries().remove(i);
 				beneficiaryRepo.deleteById(BenId);
 		
-				break;
+				return "Beneficiary Deleted Succesfully";
 			}
 			}
+		return "Beneficiary not Deleted";
 	
 	}
 
 	@Override
 	public void transfer(ArrayList<String> list) {
 		
+		Date currentDate = Calendar.getInstance().getTime();
+		
 		Long fromAccNumber = Long.parseLong(list.get(0));
 		Long toAccNumber =  Long.parseLong(list.get(1));
 		double amount= Double.parseDouble(list.get(2));
 		
-		if(fromAccNumber!=toAccNumber) {
+		if(!fromAccNumber.equals(toAccNumber)) {
 		
 		Account accountTo  = accountRepo.getById(toAccNumber);
 		Account accountFrom = accountRepo.getById(fromAccNumber);
 		
+		//Transaction transaction = new Transaction();
+		
 		double balance=accountFrom.getAccountBalance();
 		
+		
 		if (balance>=amount) {
+			/*transaction.setAmount(amount);
+			transaction.setType(TransactionType.DEBIT);;
+			transaction.setReference(list.get(3));
+			transaction.setTransactionDate(currentDate);
+			
+			transactionRepo.save(transaction);
+			*/
 			accountFrom.setAccountBalance(balance-amount);
+			accountFrom.getTransactions().add(transaction);
+			
 			accountTo.setAccountBalance(balance+amount);
+			//transaction.setAmount(amount*-1);
+			
+			accountTo.getTransactions().add(transaction);
+			
+			//transactionRepo.save(transaction);
 			
 			accountRepo.save(accountFrom);
 			accountRepo.save(accountTo);
 		}
 		}
+		/*
+		
+		
+		customer.getAccounts().add(account2);
+		
+		account2.setAccountNumber(customer.getAccounts().size()+2121212*CustId);
+		
+		customerRepo.save(customer);
+		*/
 		
 	}
 
