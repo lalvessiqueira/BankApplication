@@ -24,8 +24,8 @@ public interface CustomerService {
 	public List<Beneficiary> getAllBeneficiary(Long CustId);
 	public String deleteBeneficiary(Long CustId,Long BenId);
 	public void transfer(ArrayList<String> list);
-	public String forgot(Long CustId, String userName);
-	public String changePassword (Long CustId,Customer customer);
+	public String forgot(String userName);
+	public String changePassword (String UserName,Customer customer);
 	
 	
 	

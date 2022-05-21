@@ -32,6 +32,7 @@ public class Account {
     private String approved="no";
     private Date dateOfCreation;
     private Status accountStatus=Status.DISABLED; 
+    private String AproverName;
    
     
    // @ManyToOne
@@ -39,19 +40,13 @@ public class Account {
   // Customer customer;
 
     private Long CustomerId;
+    private String customerName;
     
     @OneToMany(cascade = CascadeType.ALL) // One customer can have multiple accounts
     // create separate table to denote acct owner, joined by customer idCustomer
 //    @JoinTable(name = "account_owner", joinColumns = @JoinColumn(name = "customerId"))
     private List<Transaction> transactions;
     
-	public Account(AccountType accountType, double accountBalance, String approved) {
-		super();
-		this.accountType = accountType;
-		this.accountBalance = accountBalance;
-		this.approved = approved;
-	}
-
 
 
 

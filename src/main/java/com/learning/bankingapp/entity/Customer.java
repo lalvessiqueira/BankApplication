@@ -10,6 +10,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
+import com.learning.bankingapp.enums.Status;
 import com.learning.bankingapp.enums.Usertype;
 
 
@@ -30,6 +31,7 @@ public class Customer extends User
     private Long SSN;
     private String secretQuestion=null;
     private String secretAnswer=null;
+    private Status status=Status.DISABLED;
 
 
     @OneToMany(cascade = CascadeType.ALL) // One customer can have multiple accounts

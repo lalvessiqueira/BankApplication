@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.learning.bankingapp.enums.AccountType;
@@ -22,12 +23,19 @@ import lombok.NoArgsConstructor;
 public class Transaction {
 	
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
 	private Date transactionDate;
 	private String reference;
+	private String TransactionBy;
 	private double amount;
 	private TransactionType type;
+	
 
+	//@ManyToOne
+	//private Account account;
+	
+	 private Long AccNo;
+	
 }

@@ -53,9 +53,9 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		account2.setAccountType(account1.getAccountType());
 		account2.setAccountBalance(account1.getAccountBalance());
-		account2.setApproved(account1.getApproved());
 		account2.setDateOfCreation(currentDate);
 		account2.setCustomerId(customer.getCustomerId());
+		account2.setCustomerName(customer.getFullName());
 		
 		customer.getAccounts().add(account2);
 		
@@ -120,12 +120,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Beneficiary addBeneficiary(Long CustId, Beneficiary beneficiary1) {
+		
 		Date currentDate = Calendar.getInstance().getTime();
 		
 		Customer customer = customerRepo.findBycustomerId(CustId);
 		Beneficiary beneficiary2= new Beneficiary();
 		
 	    int SIZE = customer.getAccounts().size();
+	    
 		
 		for (int i =0; i<SIZE; i++) {
 		
@@ -191,51 +193,51 @@ public class CustomerServiceImpl implements CustomerService {
 		Account accountTo  = accountRepo.getById(toAccNumber);
 		Account accountFrom = accountRepo.getById(fromAccNumber);
 		
-		//Transaction transaction = new Transaction();
+		double balanceTo = accountTo.getAccountBalance();
+		double balanceFrom = accountFrom.getAccountBalance();
 		
-		double balance=accountFrom.getAccountBalance();
 		
-		
-		if (balance>=amount) {
-			/*transaction.setAmount(amount);
-			transaction.setType(TransactionType.DEBIT);;
-			transaction.setReference(list.get(3));
-			transaction.setTransactionDate(currentDate);
+		if (balanceFrom>=amount) {
 			
-			transactionRepo.save(transaction);
-			*/
-			accountFrom.setAccountBalance(balance-amount);
-			accountFrom.getTransactions().add(transaction);
+			Transaction transaction1 = new Transaction();
 			
-			accountTo.setAccountBalance(balance+amount);
-			//transaction.setAmount(amount*-1);
+			transaction1.setAmount(amount);
+			transaction1.setType(TransactionType.DEBIT);;
+			transaction1.setReference(list.get(3));
+			transaction1.setTransactionDate(currentDate);
+			transaction1.setAccNo(fromAccNumber);
+			transaction1.setTransactionBy("Customer");
 			
-			accountTo.getTransactions().add(transaction);
+
 			
-			//transactionRepo.save(transaction);
+			accountFrom.setAccountBalance(balanceFrom-amount);
+			accountFrom.getTransactions().add(transaction1);
 			
-			accountRepo.save(accountFrom);
+			Transaction transaction2 = new Transaction();
+			
+			transaction2.setAmount(amount*-1);
+			transaction2.setType(TransactionType.DEBIT);;
+			transaction2.setReference(list.get(3));
+			transaction2.setTransactionDate(currentDate);
+			transaction2.setAccNo(toAccNumber);
+			transaction2.setTransactionBy("Customer");
+			
+			accountTo.setAccountBalance(balanceTo+amount);
+			accountTo.getTransactions().add(transaction2);
+			
 			accountRepo.save(accountTo);
+			accountRepo.save(accountFrom);
 		}
 		}
-		/*
-		
-		
-		customer.getAccounts().add(account2);
-		
-		account2.setAccountNumber(customer.getAccounts().size()+2121212*CustId);
-		
-		customerRepo.save(customer);
-		*/
 		
 	}
 
 	@Override
-	public String forgot(Long CustId, String userName) {
+	public String forgot(String userName) {
 		
-		Customer customer = customerRepo.getById(CustId);
+		Customer customer = customerRepo.findByusername(userName);
 		
-		if(userName.equals(customer.getUsername()))
+		if(customer!=null)
 			
 			return "Details validated";
 		
@@ -244,11 +246,11 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public String changePassword(Long CustId, Customer customer1) {
+	public String changePassword(String userName, Customer customer1) {
 		
-		Customer customer2 = customerRepo.getById(CustId);
+		Customer customer2 = customerRepo.findByusername(userName);
 		
-		if(customer2.getUsername().equals(customer1.getUsername())) {
+		if(customer2!=null) {
 			
 			customer2.setPassword(customer1.getPassword());
 		

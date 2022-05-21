@@ -11,5 +11,6 @@ import com.learning.bankingapp.entity.Customer;
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
 	
 	Customer findBycustomerId(Long Id);
+	Customer findByusername(String username);
 
 }

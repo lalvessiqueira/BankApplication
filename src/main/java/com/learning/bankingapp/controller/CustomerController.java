@@ -105,19 +105,19 @@ public class CustomerController {
 		customerService.transfer(list);
 		
 		return list.get(3);
+	}//"From/To Account Number Not Valid"
+	
+	@GetMapping("/{UserName}/forgot/question/answer")
+	public String forgotPassword(@PathVariable("UserName") String userName) {
+		
+		return customerService.forgot(userName);
+		
 	}
 	
-	@GetMapping("/{CustId}/{UserName}/forgot/question/answer")
-	public String forgotPassword(@PathVariable("CustId") Long CustId, @PathVariable("UserName") String userName) {
-		
-		return customerService.forgot(CustId,userName);
-		
-	}
-	
-	@PostMapping("/{CustId}/{UserName}/forgot")
-	public String changePassword(@PathVariable ("CustId") Long CustId, @RequestBody Customer customer) {
+	@PostMapping("{UserName}/forgot")
+	public String changePassword(@PathVariable ("UserName") String UserName, @RequestBody Customer customer) {
 
-			return customerService.changePassword (CustId,customer);
+			return customerService.changePassword (UserName,customer);
 		
 	}
 	

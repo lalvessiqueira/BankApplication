@@ -22,6 +22,6 @@ public interface StaffService {
 	public Account approveAccount(Account account);
 	public List<Customer> getAllCustomer();
 	public Customer enableCustomer(Customer customer);
-	public Optional<Customer> getCustomerById(Long CustId) ;
+	public Customer getCustomerById(Long CustId) ;
 	public void transfer(ArrayList<String> list);
 }

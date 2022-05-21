@@ -31,7 +31,7 @@ public class StaffController {
 	@GetMapping("/account/{AccNo}")
 	public Optional<Account> getAllAccountByCustId(@PathVariable("AccNo") Long AccNo) {
 		return staffService.staffgetAccount(AccNo);
-	}
+	}//"ACCOUNT NOT FOUND"
 	
 	@GetMapping("/beneficiary")
 	public List<Beneficiary> getAllBeneficiaryToApproved(){
@@ -42,7 +42,7 @@ public class StaffController {
 	public Beneficiary approveBeneficiary( @RequestBody Beneficiary beneficiary) {
 
 			return staffService.approveBeneficiary(beneficiary);
-	}
+	}//"SORRY BENEFICIARY NOT APPROVED"
 	
 	@GetMapping("/accounts/approve")
 	public List<Account> getAllAccountsToApproved(){
@@ -53,7 +53,7 @@ public class StaffController {
 	public Account approveAccount( @RequestBody Account accounts) {
 
 			return staffService.approveAccount(accounts);
-	}
+	}//"APPROVING OF ACCOUNT WAS NOT SUCCESFULL"
 	
 	@GetMapping("/customer")
 	public List<Customer> getAllCustomer(){
@@ -66,12 +66,14 @@ public class StaffController {
 	public Customer enableCustomer( @RequestBody Customer customer) {
 
 			return staffService.enableCustomer(customer);
-	}
+			
+	}//"CUSTOMER STATUS NOT CHANGED"
+	
 	
 	@GetMapping("/customer/{CustId}")
-	public Optional<Customer> getCustomerById(@PathVariable("CustId") Long CustId) {
+	public Customer getCustomerById(@PathVariable("CustId") Long CustId) {
 		return staffService.getCustomerById(CustId);
-	}
+	}//"CUSTOMER NOT FOUND"
 	
 	@PostMapping("/transfer")
 	public String transfer(@RequestBody ArrayList <String>list) {
@@ -79,6 +81,6 @@ public class StaffController {
 		staffService.transfer(list);
 		
 		return list.get(3);
-	}
+	}//"FROM/TO ACCOUNT NUMBER NOT VALID"
 	
 }
