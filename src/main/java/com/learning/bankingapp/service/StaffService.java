@@ -4,17 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
 import com.learning.bankingapp.entity.Customer;
+import com.learning.bankingapp.entity.Staff;
 
 
 public interface StaffService {
 	
+	public String security(Staff staff1);
 	public Optional<Account> staffgetAccount(Long AccNo);
 	public List<Beneficiary> getBeneficiaryToApproved();
 	public Beneficiary approveBeneficiary(Beneficiary beneficiary);

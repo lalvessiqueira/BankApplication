@@ -1,26 +1,22 @@
 package com.learning.bankingapp.entity;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.learning.bankingapp.enums.UserType;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-
 @Data
 @NoArgsConstructor
+
 @Entity
-//@Table(name = "customers")
+@Table(name = "Admin")
 //@DiscriminatorValue (value = "Admin")
 public class Admin extends User
 {
-	
-    private String customerId;
-
-
+	private UserType usertype=UserType.ADMIN;
 
 }

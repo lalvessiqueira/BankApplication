@@ -12,13 +12,10 @@ import org.springframework.stereotype.Service;
 import com.learning.bankingapp.Repo.AccountRepo;
 import com.learning.bankingapp.Repo.BeneficiaryRepo;
 import com.learning.bankingapp.Repo.CustomerRepo;
-import com.learning.bankingapp.Repo.TransactionRepo;
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
 import com.learning.bankingapp.entity.Customer;
 import com.learning.bankingapp.entity.Transaction;
-import com.learning.bankingapp.entity.User;
-import com.learning.bankingapp.enums.AccountType;
 import com.learning.bankingapp.enums.TransactionType;
 
 
@@ -33,9 +30,6 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private AccountRepo accountRepo;
-	
-	@Autowired
-	private TransactionRepo transactionRepo;
 
 	@Override
 	public void register(Customer customer) {
@@ -43,6 +37,19 @@ public class CustomerServiceImpl implements CustomerService {
 		customerRepo.save(customer);
 	}
 
+	@Override
+	public String security(Customer customer1) {
+		
+		Customer customer2 = customerRepo.findBycustomerId(customer1.getCustomerId());
+		
+		if (customer2.getUsername().equals(customer1.getUsername()) &&
+				customer2.getPassword().equals(customer1.getPassword()) ) {
+			return "good to go";
+		}
+		else
+			return "Not correct";
+	}
+	
 	@Override
 	public Account createAccount(Long CustId, Account account1) {
 
@@ -65,6 +72,9 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	 return account2;
 	}
+	
+	
+	
 
 	@Override
 	public Account approveAccount(Long CustId, Long AccNo, Account account1) {
@@ -73,7 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		if (account2.getCustomerId().equals(CustId)) {
 			
-			account2.setApproved("yes");
+			account2.setApproved(account1.getApproved());
 			return accountRepo.save(account2);
 			
 		}
@@ -98,7 +108,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer updateCustomer(Long CustId, Customer customer1) {
 		
-		Customer customer2 = customerRepo.getById(CustId);
+		Customer customer2 = customerRepo.findBycustomerId(CustId);
 	
 		customer2.setFullName(customer1.getFullName());
 		customer2.setPhone(customer1.getPhone());
@@ -112,9 +122,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Account getAccount(Long CustId, Long AccNo) {
+	public Optional<Account> getAccount(Long CustId, Long AccNo) {
 		
-		return accountRepo.getById(AccNo);
+		return accountRepo.findById(AccNo);
 		
 	}
 
@@ -262,10 +272,6 @@ public class CustomerServiceImpl implements CustomerService {
 			return "Sorry password not updated";
 	}
 
-	
-		
-	
-	
-	
+
 
 }

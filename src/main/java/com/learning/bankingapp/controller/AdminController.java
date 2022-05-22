@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.learning.bankingapp.entity.Customer;
+import com.learning.bankingapp.entity.Admin;
 import com.learning.bankingapp.entity.Staff;
 import com.learning.bankingapp.service.AdminService;
-import com.learning.bankingapp.service.StaffService;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -22,7 +21,9 @@ public class AdminController {
 	AdminService adminService;
 	
 	@PostMapping("/authenticate")
-	public void Authenticate() {}
+	public String Authenticate(@RequestBody Admin admin) {
+		return adminService.security(admin);
+	}
 	
 	@PostMapping("/staff")
 	public Staff createStaff( @RequestBody Staff staff) {

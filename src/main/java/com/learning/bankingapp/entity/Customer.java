@@ -11,7 +11,7 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
 import com.learning.bankingapp.enums.Status;
-import com.learning.bankingapp.enums.Usertype;
+import com.learning.bankingapp.enums.UserType;
 
 
 @Data
@@ -32,21 +32,14 @@ public class Customer extends User
     private String secretQuestion=null;
     private String secretAnswer=null;
     private Status status=Status.DISABLED;
+    private UserType usertype=UserType.CUSTOMER;
 
 
-    @OneToMany(cascade = CascadeType.ALL) // One customer can have multiple accounts
-    // create separate table to denote acct owner, joined by customer idCustomer
-//    @JoinTable(name = "account_owner", joinColumns = @JoinColumn(name = "customerId"))
+    @OneToMany(cascade = CascadeType.ALL) 
     private List<Account> accounts;
 
-    @OneToMany(cascade = CascadeType.ALL) // One customer can have multiple beneficiary accounts
-    // create separate table to denote acct owner, joined by customer idCustomer
- //   @JoinTable(name = "beneficiary", joinColumns = @JoinColumn(name = "customerId"))
+    @OneToMany(cascade = CascadeType.ALL) 
     private List<Beneficiary> beneficiaries;
-
-  //  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-   // private List<Staff> staff;
-
 
 
 

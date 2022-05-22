@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
 import com.learning.bankingapp.entity.Customer;
-import com.learning.bankingapp.service.CustomerService;
+import com.learning.bankingapp.entity.Staff;
 import com.learning.bankingapp.service.StaffService;
 
 @RestController
@@ -26,7 +26,9 @@ public class StaffController {
 	StaffService staffService;
 	
 	@PostMapping("/authenticate")
-	public void Authenticate() {}
+	public String Authenticate(@RequestBody Staff staff) {
+		return staffService.security(staff);
+	}
 	
 	@GetMapping("/account/{AccNo}")
 	public Optional<Account> getAllAccountByCustId(@PathVariable("AccNo") Long AccNo) {

@@ -9,14 +9,13 @@ import com.learning.bankingapp.enums.AccountType;
 import com.learning.bankingapp.enums.Active;
 
 import java.util.Date;
-import java.util.List;
 
 
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "beneficiaries")
-//@DiscriminatorValue (value = "Beneficiary")
+@Table(name = "Beneficiaries")
+@DiscriminatorValue (value = "Beneficiary")
 public class Beneficiary {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)

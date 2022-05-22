@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
 import com.learning.bankingapp.entity.Customer;
-import com.learning.bankingapp.enums.AccountType;
 import com.learning.bankingapp.service.CustomerService;
 
 @RestController
@@ -35,7 +33,9 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/authenticate")
-	public void Authenticate() {}
+	public String Authenticate(@RequestBody Customer customer) {
+		return customerService.security(customer);
+	}
 	
 	@PostMapping("/{CustId}/account")
 	public Account createAccount(@PathVariable ("CustId") Long CustId, @RequestBody Account account) {
@@ -69,7 +69,7 @@ public class CustomerController {
 	}//"SORRY CUSTOMER WITH <ID> NOT FOUND"
 	
 	@GetMapping("/{CustId}/account/{AccNo}")
-	public Account getAccount(@PathVariable ("AccNo") Long AccNo, @PathVariable ("CustId")Long CustId) {
+	public Optional<Account> getAccount(@PathVariable ("AccNo") Long AccNo, @PathVariable ("CustId")Long CustId) {
 
 		return customerService.getAccount(CustId,AccNo);
 		

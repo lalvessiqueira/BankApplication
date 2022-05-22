@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 import com.learning.bankingapp.Repo.AccountRepo;
 import com.learning.bankingapp.Repo.BeneficiaryRepo;
 import com.learning.bankingapp.Repo.CustomerRepo;
+import com.learning.bankingapp.Repo.StaffRepo;
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
 import com.learning.bankingapp.entity.Customer;
+import com.learning.bankingapp.entity.Staff;
 import com.learning.bankingapp.entity.Transaction;
 import com.learning.bankingapp.enums.TransactionType;
 
@@ -29,6 +31,23 @@ public class StaffServiceImpl implements StaffService {
 	
 	@Autowired
 	private BeneficiaryRepo beneficiaryRepo;
+	
+	@Autowired
+	private StaffRepo staffRepo;
+	
+	@Override
+	public String security(Staff staff1) {
+		
+		Staff staff2 = staffRepo.findBystaffId(staff1.getStaffId());
+		
+		if (staff2.getUsername().equals(staff1.getUsername()) &&
+				staff2.getPassword().equals(staff1.getPassword()) ) {
+			return "good to go";
+		}
+		else
+			return "Not correct";
+		
+	}
 
 	@Override
 	public Optional<Account> staffgetAccount(Long AccNo) {

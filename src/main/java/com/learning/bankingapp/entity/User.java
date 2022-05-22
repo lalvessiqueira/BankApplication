@@ -1,7 +1,6 @@
 package com.learning.bankingapp.entity;
 
-import com.learning.bankingapp.enums.Usertype;
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,11 +12,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = {"username"} ))
 @Inheritance (strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "User_type")
+//@DiscriminatorColumn(name = "User_type")
 public class User {
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
     private long uid;
     @Column(name = "username")
     private String username;
@@ -25,34 +24,13 @@ public class User {
     private String fullName;
     @Column(name = "password")
     private String password;
-    @Column(name = "usertype")
-    private Usertype usertype;
+   
     
-	public User(String username, String fullName, String password, Usertype usertype) {
+	public User(String username, String fullName, String password) {
 		super();
 		this.username = username;
 		this.fullName = fullName;
 		this.password = password;
-		this.usertype = usertype;
 	}
-    
-    /*
-    @OneToOne(cascade = CascadeType.ALL)
-    Customer customer;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    Staff staff;
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    Beneficiary beneficiary;
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    Admin admin;
-*/
-    // security?
-//    private String secretQuestion;
-//    private String secretAnswer;
-
-    
-    
+       
 }
