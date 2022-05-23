@@ -35,6 +35,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Staff createStaff(Staff staff) {
 		
+		staffRepo.save(staff);
+		String[] Name = staff.getFullName().split("\\s");
+		staff.setStaffId("S"+(Name[0].substring(0,1)+Name[1].substring(0,1)).toUpperCase()+"_"+staff.getUid());
 		return staffRepo.save(staff);
 	}
 

@@ -31,7 +31,7 @@ public class StaffController {
 	}
 	
 	@GetMapping("/account/{AccNo}")
-	public Optional<Account> getAllAccountByCustId(@PathVariable("AccNo") Long AccNo) {
+	public Optional<Account> getAllAccountByCustId(@PathVariable("AccNo") String AccNo) {
 		return staffService.staffgetAccount(AccNo);
 	}//"ACCOUNT NOT FOUND"
 	
@@ -73,7 +73,7 @@ public class StaffController {
 	
 	
 	@GetMapping("/customer/{CustId}")
-	public Customer getCustomerById(@PathVariable("CustId") Long CustId) {
+	public Customer getCustomerById(@PathVariable("CustId") String CustId) {
 		return staffService.getCustomerById(CustId);
 	}//"CUSTOMER NOT FOUND"
 	

@@ -50,7 +50,7 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public Optional<Account> staffgetAccount(Long AccNo) {
+	public Optional<Account> staffgetAccount(String AccNo) {
 		
 		return accountRepo.findById(AccNo);
 	
@@ -135,7 +135,7 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public Customer getCustomerById(Long CustId) {
+	public Customer getCustomerById(String CustId) {
 		
 		Customer customer = customerRepo.findBycustomerId(CustId);
 		
@@ -147,8 +147,8 @@ public class StaffServiceImpl implements StaffService {
 		
 		Date currentDate = Calendar.getInstance().getTime();
 
-		Long fromAccNumber = Long.parseLong(list.get(0));
-		Long toAccNumber =  Long.parseLong(list.get(1));
+		String fromAccNumber = list.get(0);
+		String toAccNumber =  list.get(1);
 		double amount= Double.parseDouble(list.get(2));
 		
 		if(!fromAccNumber.equals(toAccNumber)) {

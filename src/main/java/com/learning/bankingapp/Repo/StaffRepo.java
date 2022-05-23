@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import com.learning.bankingapp.entity.Staff;
 
 @Repository
-public interface StaffRepo extends JpaRepository<Staff, Long> {
+public interface StaffRepo extends JpaRepository<Staff, String> {
 	
-	Staff findBystaffId(Long Id);
+	Staff findBystaffId(String Id);
 
 }

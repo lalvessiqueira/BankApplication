@@ -5,7 +5,7 @@ import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import React from "react";
 
 function App() {
-  return (
+    return (
     <div className="App">
       <Landing/>
     </div>

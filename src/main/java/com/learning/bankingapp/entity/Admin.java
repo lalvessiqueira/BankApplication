@@ -2,6 +2,7 @@ package com.learning.bankingapp.entity;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.learning.bankingapp.enums.UserType;

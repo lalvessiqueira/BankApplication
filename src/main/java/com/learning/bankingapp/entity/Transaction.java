@@ -33,6 +33,6 @@ public class Transaction {
 	//@ManyToOne
 	//private Account account;
 	
-	 private Long AccNo;
+	 private String AccNo;
 	
 }

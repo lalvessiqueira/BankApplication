@@ -7,11 +7,18 @@ import {
     MDBTabsPane, MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput, MDBCheckbox
 } from 'mdb-react-ui-kit';
 import './LoginRegister.css';
-
+import axios from "axios";
 
 export default function LoginRegister() {
+
     // Handle form variables, submission, POST request
-    const {empName, mobile, personalEmail} = []
+    const [details, setDetails] = useState(
+        {
+            username : '',
+            fullName : '',
+            password : ''
+        }
+    );
 
     // Handle Login or Register Pills
     const [loginOrRegister, setLoginOrRegister] = useState('login');
@@ -21,6 +28,25 @@ export default function LoginRegister() {
         }
         setLoginOrRegister(value);
     };
+
+    const changeHandler = (e) => {
+        setDetails({[e.target.name]: e.target.value})
+    }
+
+    const submitHandler = (e) =>{
+        e.preventDefault()
+        console.log("this.state:")
+        console.log(details)
+        axios.post('http://localhost:8081/api/customer/register', details).then(response => {
+            console.log(response.data)
+            console.log("here details")
+            console.log(details)
+        }).catch(error => {
+            console.log(error)
+            console.log("here details")
+            console.log(details)
+        })
+    }
 
     return (
         <MDBContainer className='rounded-3' id='bg-glass'>
@@ -82,12 +108,29 @@ export default function LoginRegister() {
                             </form>
                         </MDBTabsPane>
                         <MDBTabsPane show={loginOrRegister === 'register'}>
-                            <form>
+                            <form onSubmit={submitHandler}>
                                 <MDBInput className='mb-4 text-white'
                                           type='text'
                                           label='Username'
-                                          name='empName'
-                                          value={empName}
+                                          name='username'
+                                          value={details.username}
+                                          onChange={(e) =>
+                                              setDetails({...details, username: e.target.value,})}
+                                />
+                                <MDBInput className='mb-4 text-white'
+                                          type='text' label='Full Name'
+                                          name="fullName"
+                                          value={details.fullName}
+                                          onChange={(e) =>
+                                              setDetails({...details, fullName: e.target.value,})}
+                                />
+                                <MDBInput className='mb-4 text-white'
+                                          type='password'
+                                          label='Password'
+                                          name="password"
+                                          value={details.password}
+                                          onChange={(e) =>
+                                              setDetails({...details, password: e.target.value,})}
                                 />
                                 <MDBInput className='mb-4 text-white' type='text' label='Full Name'/>
                                 <MDBInput className='mb-4 text-white' type='password' label='Password'/>

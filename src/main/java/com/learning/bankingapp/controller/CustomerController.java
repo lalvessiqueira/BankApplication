@@ -38,45 +38,45 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/{CustId}/account")
-	public Account createAccount(@PathVariable ("CustId") Long CustId, @RequestBody Account account) {
+	public Account createAccount(@PathVariable ("CustId") String CustId, @RequestBody Account account) {
 
 		return customerService.createAccount(CustId,account);
 		
 	}//IF DONT WORK "ACCOUNT CANNOT BE CREATED"
 	
 	@PostMapping("/{CustId}/account/{AccNo}")
-	public Account approveAccount(@PathVariable ("AccNo") Long AccNo, @PathVariable ("CustId")Long CustId, @RequestBody Account account) {
+	public Account approveAccount(@PathVariable ("AccNo") String AccNo, @PathVariable ("CustId")String CustId, @RequestBody Account account) {
 
 		return customerService.approveAccount(CustId,AccNo,account);
 		
 	}//IF DONT WORK PLEASE CHECK ACCOUNT NUMBER
 	
 	@GetMapping("/{CustId}/account")
-	public List<Account> getAllAccountByCustId(@PathVariable("CustId") Long CustId) {
+	public List<Account> getAllAccountByCustId(@PathVariable("CustId") String CustId) {
 		return customerService.getAllAccount(CustId);
 	}
 	
 	@GetMapping("/{CustId}")
-	public Customer getCustomerByCustId(@PathVariable("CustId") Long CustId) {
+	public Customer getCustomerByCustId(@PathVariable("CustId") String CustId) {
 		return customerService.getCustomer(CustId);
 	}//"SORRY CUSTOMER WITH <ID> NOT FOUND"
 	
 	@PostMapping("/{CustId}")
-	public Customer updateCustomer(@PathVariable ("CustId") Long CustId, @RequestBody Customer customer) {
+	public Customer updateCustomer(@PathVariable ("CustId") String CustId, @RequestBody Customer customer) {
 
 		return customerService.updateCustomer(CustId,customer);
 		
 	}//"SORRY CUSTOMER WITH <ID> NOT FOUND"
 	
 	@GetMapping("/{CustId}/account/{AccNo}")
-	public Optional<Account> getAccount(@PathVariable ("AccNo") Long AccNo, @PathVariable ("CustId")Long CustId) {
+	public Optional<Account> getAccount(@PathVariable ("AccNo") String AccNo, @PathVariable ("CustId")String CustId) {
 
 		return customerService.getAccount(CustId,AccNo);
 		
 	}//"SORRY CUSTOMER WITH <ID> NOT FOUND"
 	
 	@PostMapping("/{CustId}/beneficiary")
-	public String addBeneficiary(@PathVariable ("CustId") Long CustId, @RequestBody Beneficiary beneficiary) {
+	public String addBeneficiary(@PathVariable ("CustId") String CustId, @RequestBody Beneficiary beneficiary) {
 
 			Beneficiary beneficiary2 = customerService.addBeneficiary(CustId,beneficiary);
 			
@@ -88,12 +88,12 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/{CustId}/beneficiary")
-	public List<Beneficiary> getAllBeneficiaryByCustId(@PathVariable("CustId") Long CustId) {
+	public List<Beneficiary> getAllBeneficiaryByCustId(@PathVariable("CustId") String CustId) {
 		return customerService.getAllBeneficiary(CustId);
 	}
 	
 	@DeleteMapping("/{CustId}/beneficiary/{BenId}")
-	public String deleteMobileById(@PathVariable("CustId") Long CustId,@PathVariable("BenId") Long BenId) {
+	public String deleteMobileById(@PathVariable("CustId") String CustId,@PathVariable("BenId") String BenId) {
 		
 		return customerService.deleteBeneficiary(CustId,BenId);
 	
@@ -107,10 +107,12 @@ public class CustomerController {
 		return list.get(3);
 	}//"From/To Account Number Not Valid"
 	
-	@GetMapping("/{UserName}/forgot/question/answer")
-	public String forgotPassword(@PathVariable("UserName") String userName) {
+	@GetMapping("/{UserName}/forgot/{Question}/{Answer}")
+	public String forgotPassword(@PathVariable("UserName") String userName,
+			@PathVariable("Question") String question,@PathVariable("Answer") String answer)
+	{
 		
-		return customerService.forgot(userName);
+		return customerService.forgot(userName,question,answer);
 		
 	}
 	

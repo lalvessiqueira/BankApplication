@@ -6,25 +6,31 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.learning.bankingapp.enums.UserType;
+
 @Data
 @NoArgsConstructor
 
 @Entity
 @Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = {"username"} ))
 @Inheritance (strategy = InheritanceType.JOINED)
-//@DiscriminatorColumn(name = "User_type")
+@DiscriminatorColumn(name = "User_type")
 public class User {
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long uid;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "customer_seq")
+    @GenericGenerator(name = "customer_seq", strategy = "com.learning.bankingapp.util.UserIdGenerator")
+	//@GeneratedValue (strategy = GenerationType.IDENTITY)
+    private String uid;
     @Column(name = "username")
     private String username;
     @Column(name = "full_name")
     private String fullName;
     @Column(name = "password")
     private String password;
-   
+    
     
 	public User(String username, String fullName, String password) {
 		super();

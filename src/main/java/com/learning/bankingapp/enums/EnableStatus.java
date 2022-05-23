@@ -1,5 +1,5 @@
 package com.learning.bankingapp.enums;
 
-public enum Status {
+public enum EnableStatus {
     ENABLED, DISABLED
 }
