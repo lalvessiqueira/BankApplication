@@ -6,6 +6,7 @@ import LoginRegister from "./LoginRegister";
 import Footer from "./Footer";
 import LandingCardGroup from "./LandingCardGroup";
 import LandingTestimonials from "./LandingTestimonials";
+import DashSideBar from "../CustomerDash/DashSideBar";
 
 class Landing extends Component {
     render() {
@@ -22,7 +23,7 @@ class Landing extends Component {
                             </div>
                             <div className="col-md-6 mb-3">
                                 <LoginRegister/>
-                                <LandingTestimonials/>
+                                <DashSideBar/>
                             </div>
                         </div>
                     </section>
