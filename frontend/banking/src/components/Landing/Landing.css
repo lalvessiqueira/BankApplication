@@ -1,0 +1,11 @@
+body {
+    background: rgb(0,56,87);
+    background: radial-gradient(circle, rgba(0,56,87,1) 0%, rgba(184,159,198,1) 35%, rgba(135,189,218,1) 51%, rgba(0,212,255,1) 100%);
+}
+
+#bg-glass {
+    background: hsla(0, 0%, 100%, 0.15);
+    backdrop-filter: blur(30px);
+    color: whitesmoke;
+}
+
