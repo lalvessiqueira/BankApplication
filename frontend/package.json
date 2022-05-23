@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "axios": "^0.27.2",
+    "mdb-react-ui-kit": "^3.0.0"
+  }
+}
