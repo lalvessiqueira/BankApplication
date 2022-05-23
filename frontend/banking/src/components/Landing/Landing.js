@@ -1,27 +1,28 @@
 import React, {Component} from 'react';
-import {MDBCol, MDBContainer, MDBRow} from "mdb-react-ui-kit";
 import './Landing.css';
-import LandingTopBar from "./LandingTopBar";
+import LandingHeader from "./LandingHeader";
 import LandingCard from "./LandingCard";
 import LoginRegister from "./LoginRegister";
 import Footer from "./Footer";
 import LandingCardGroup from "./LandingCardGroup";
+import LandingTestimonials from "./LandingTestimonials";
 
 class Landing extends Component {
     render() {
         return (
-            <div class="container">
-                <div class="row">
-                    <LandingTopBar/>
+            <div className="container">
+                <div className="row">
+                    <LandingHeader/>
                 </div>
                 <div>
                     <section>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
                                 <LandingCard/>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div className="col-md-6 mb-3">
                                 <LoginRegister/>
+                                <LandingTestimonials/>
                             </div>
                         </div>
                     </section>
@@ -40,4 +41,3 @@ class Landing extends Component {
 }
 
 export default Landing;
-//

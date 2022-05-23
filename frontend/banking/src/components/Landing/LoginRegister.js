@@ -7,7 +7,6 @@ import {
     MDBTabsPane, MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput, MDBCheckbox
 } from 'mdb-react-ui-kit';
 import './LoginRegister.css';
-import axios from "axios";
 
 
 export default function LoginRegister() {
@@ -70,7 +69,7 @@ export default function LoginRegister() {
 
                                 <MDBRow className='mb-4'>
                                     <MDBCol className='d-flex justify-content-center'>
-                                        <MDBCheckbox id='form7Example3' label='Remember me' defaultChecked />
+                                        <MDBCheckbox label='Remember me' defaultChecked />
                                     </MDBCol>
                                     <MDBCol>
                                         <a href='#!'>Forgot password?</a>
@@ -90,8 +89,9 @@ export default function LoginRegister() {
                                           name='empName'
                                           value={empName}
                                 />
-                                <MDBInput className='mb-4 text-white' type='text' label='Full Name' value={mobile}/>
-                                <MDBInput className='mb-4 text-white' type='password' label='Password' value={personalEmail}/>
+                                <MDBInput className='mb-4 text-white' type='text' label='Full Name'/>
+                                <MDBInput className='mb-4 text-white' type='password' label='Password'/>
+                                <MDBInput className='mb-4 text-white' type='password' label='Confirm Password'/>
 
                                 <MDBCheckbox
                                     wrapperClass='d-flex justify-content-center mb-4'
