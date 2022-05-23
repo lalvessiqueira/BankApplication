@@ -115,14 +115,14 @@ export default function LoginRegister() {
                                           name='username'
                                           value={details.username}
                                           onChange={(e) =>
-                                              setDetails({...details, username: e.target.value,})}
+                                              setDetails({...details, username: e.target.value})}
                                 />
                                 <MDBInput className='mb-4 text-white'
                                           type='text' label='Full Name'
                                           name="fullName"
                                           value={details.fullName}
                                           onChange={(e) =>
-                                              setDetails({...details, fullName: e.target.value,})}
+                                              setDetails({...details, fullName: e.target.value})}
                                 />
                                 <MDBInput className='mb-4 text-white'
                                           type='password'
@@ -130,11 +130,9 @@ export default function LoginRegister() {
                                           name="password"
                                           value={details.password}
                                           onChange={(e) =>
-                                              setDetails({...details, password: e.target.value,})}
+                                              setDetails({...details, password: e.target.value})}
                                 />
-                                <MDBInput className='mb-4 text-white' type='text' label='Full Name'/>
-                                <MDBInput className='mb-4 text-white' type='password' label='Password'/>
-                                <MDBInput className='mb-4 text-white' type='password' label='Confirm Password'/>
+
 
                                 <MDBCheckbox
                                     wrapperClass='d-flex justify-content-center mb-4'

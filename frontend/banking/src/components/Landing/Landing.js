@@ -23,7 +23,6 @@ class Landing extends Component {
                             </div>
                             <div className="col-md-6 mb-3">
                                 <LoginRegister/>
-                                <DashSideBar/>
                             </div>
                         </div>
                     </section>
