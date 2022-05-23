@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 import com.learning.bankingapp.entity.Customer;
 
 @Repository
-public interface CustomerRepo extends JpaRepository<Customer, Long> {
+public interface CustomerRepo extends JpaRepository<Customer, String> {
 	
-	Customer findBycustomerId(Long Id);
+	Customer findBycustomerId(String Id);
 	Customer findByusername(String username);
 
 }

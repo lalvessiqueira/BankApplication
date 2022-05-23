@@ -1,6 +1,6 @@
 package com.learning.bankingapp.entity;
 
-import com.learning.bankingapp.enums.Status;
+import com.learning.bankingapp.enums.EnableStatus;
 import com.learning.bankingapp.enums.UserType;
 
 import lombok.Data;
@@ -18,10 +18,8 @@ import org.hibernate.annotations.GenerationTime;
 //@DiscriminatorValue (value = "Staff")
 public class Staff extends User{
 	
-	@Generated(GenerationTime.INSERT)
-	@Column(name = "staffId", columnDefinition = "serial", updatable = false)
-    private Long staffId;
-    private Status status=Status.DISABLED;
+	private String staffId;
+    private EnableStatus status=EnableStatus.DISABLED;
     private UserType usertype=UserType.STAFF;
 
 }

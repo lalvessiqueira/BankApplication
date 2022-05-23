@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.learning.bankingapp.entity.Beneficiary;
 
 @Repository
-public interface BeneficiaryRepo extends JpaRepository<Beneficiary, Long> {
+public interface BeneficiaryRepo extends JpaRepository<Beneficiary, String> {
 
 }

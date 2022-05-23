@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.learning.bankingapp.enums.AccountType;
-import com.learning.bankingapp.enums.Status;
+import com.learning.bankingapp.enums.EnableStatus;
 
 import java.util.Date;
 import java.util.List;
@@ -23,12 +23,12 @@ import java.util.List;
 public class Account {
 
     @Id
-    private Long accountNumber;
+    private String accountNumber;
     private AccountType accountType;
     private double accountBalance;
     private String approved="no";
     private Date dateOfCreation;
-    private Status accountStatus=Status.DISABLED; 
+    private EnableStatus accountStatus=EnableStatus.DISABLED; 
     private String AproverName;
    
     
@@ -36,7 +36,7 @@ public class Account {
   //@JoinTable(name="emp_addr_tbl",joinColumns = @JoinColumn (name="empId"))
   // Customer customer;
 
-    private Long CustomerId;
+    private String CustomerId;
     private String customerName;
     
     @OneToMany(cascade = CascadeType.ALL) // One customer can have multiple accounts

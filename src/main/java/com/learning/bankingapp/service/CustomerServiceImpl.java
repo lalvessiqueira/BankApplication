@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public void register(Customer customer) {
 		
 		customerRepo.save(customer);
+		String[] Name = customer.getFullName().split("\\s");
+		customer.setCustomerId("C"+(Name[0].substring(0,1)+Name[1].substring(0,1)).toUpperCase()+"_"+customer.getUid());
+		customerRepo.save(customer);
 	}
 
 	@Override
@@ -51,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
-	public Account createAccount(Long CustId, Account account1) {
+	public Account createAccount(String CustId, Account account1) {
 
 		Date currentDate = Calendar.getInstance().getTime();
 		
@@ -65,8 +69,12 @@ public class CustomerServiceImpl implements CustomerService {
 		account2.setCustomerName(customer.getFullName());
 		
 		customer.getAccounts().add(account2);
+				
+		 Long N = Long.parseLong(customer.getUid());
+		 N = N*100+111+customer.getAccounts().size();
+	     String number= String.format("%09d", N);
 		
-		account2.setAccountNumber(customer.getAccounts().size()+2121212*CustId);
+		account2.setAccountNumber(number);
 		
 		customerRepo.save(customer);
 	
@@ -77,7 +85,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 
 	@Override
-	public Account approveAccount(Long CustId, Long AccNo, Account account1) {
+	public Account approveAccount(String CustId, String AccNo, Account account1) {
 		
 		Account account2 = accountRepo.getById(AccNo);
 		
@@ -93,20 +101,20 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<Account> getAllAccount(Long CustId) {
+	public List<Account> getAllAccount(String CustId) {
 
 		Customer customer = customerRepo.findBycustomerId(CustId);
 		return customer.getAccounts();
 	}
 
 	@Override
-	public Customer getCustomer(Long CustId) {
+	public Customer getCustomer(String CustId) {
 	
 		return customerRepo.findBycustomerId(CustId);
 	}
 
 	@Override
-	public Customer updateCustomer(Long CustId, Customer customer1) {
+	public Customer updateCustomer(String CustId, Customer customer1) {
 		
 		Customer customer2 = customerRepo.findBycustomerId(CustId);
 	
@@ -122,14 +130,14 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Optional<Account> getAccount(Long CustId, Long AccNo) {
+	public Optional<Account> getAccount(String CustId, String AccNo) {
 		
 		return accountRepo.findById(AccNo);
 		
 	}
 
 	@Override
-	public Beneficiary addBeneficiary(Long CustId, Beneficiary beneficiary1) {
+	public Beneficiary addBeneficiary(String CustId, Beneficiary beneficiary1) {
 		
 		Date currentDate = Calendar.getInstance().getTime();
 		
@@ -162,14 +170,14 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<Beneficiary> getAllBeneficiary(Long CustId) {
+	public List<Beneficiary> getAllBeneficiary(String CustId) {
 		
 		Customer customer = customerRepo.findBycustomerId(CustId);
 		return customer.getBeneficiaries();
 	}
 
 	@Override
-	public String deleteBeneficiary(Long CustId, Long BenId) {
+	public String deleteBeneficiary(String CustId, String BenId) {
 		
 		Customer customer = customerRepo.findBycustomerId(CustId);
 
@@ -177,7 +185,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		for (int i =0; i<SIZE; i++) {
 		
-			if(customer.getBeneficiaries().get(i).getBId()==BenId) {
+			if(customer.getBeneficiaries().get(i).getBId().equals(BenId)) {
 				
 				customer.getBeneficiaries().remove(i);
 				beneficiaryRepo.deleteById(BenId);
@@ -194,8 +202,8 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		Date currentDate = Calendar.getInstance().getTime();
 		
-		Long fromAccNumber = Long.parseLong(list.get(0));
-		Long toAccNumber =  Long.parseLong(list.get(1));
+		String fromAccNumber = list.get(0);
+		String toAccNumber =  list.get(1);
 		double amount= Double.parseDouble(list.get(2));
 		
 		if(!fromAccNumber.equals(toAccNumber)) {
@@ -243,16 +251,23 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public String forgot(String userName) {
+	public String forgot(String userName, String question,String answer) {
 		
 		Customer customer = customerRepo.findByusername(userName);
 		
-		if(customer!=null)
+		if(customer!=null) {
 			
-			return "Details validated";
-		
+			if (customer.getSecretQuestion().equals(question)&&customer.getSecretQuestion().equals(question))
+				
+				return "Details validated";
+
+			else
+				
+				return "Sorry your secret details are not matching";
+		}
+			
 		else 
-			return "Sorry your secret details are not matching";
+			return "User name do not found";
 	}
 
 	@Override

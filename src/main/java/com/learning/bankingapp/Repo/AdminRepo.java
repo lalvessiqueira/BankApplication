@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.learning.bankingapp.entity.Admin;
 
 @Repository
-public interface AdminRepo extends JpaRepository<Admin, Long> {
+public interface AdminRepo extends JpaRepository<Admin, String> {
 
 }
