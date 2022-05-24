@@ -1,19 +1,6 @@
-import React, { useState } from 'react';
-import { MDBBtn,
-    MDBModal,
-    MDBModalDialog,
-    MDBModalContent,
-    MDBModalHeader,
-    MDBModalTitle,
-    MDBModalBody,
-    MDBModalFooter,
-} from 'mdb-react-ui-kit';
+import React from 'react';
 
 export default function SecQuesMismatch() {
-    const [centredModal, setCentredModal] = useState(false);
-
-    const toggleShow = () => setCentredModal(!centredModal);
-
     return (
         <div className='container rounded-3' id='bg-glass'>
             <div className='row'>

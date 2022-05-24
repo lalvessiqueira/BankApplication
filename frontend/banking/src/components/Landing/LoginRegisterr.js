@@ -8,6 +8,7 @@ import {
 } from 'mdb-react-ui-kit';
 import './LoginRegister.css';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 class LoginRegisterr extends Component {
 
@@ -98,7 +99,9 @@ class LoginRegisterr extends Component {
                                             <MDBCheckbox id='form7Example3' label='Remember me' defaultChecked />
                                         </MDBCol>
                                         <MDBCol>
-                                            <a href='#!'>Forgot password?</a>
+                                            <Link to="/resetPassword">
+                                                <a href='/resetPassword'>Forgot password?</a>
+                                            </Link>
                                         </MDBCol>
                                     </MDBRow>
 

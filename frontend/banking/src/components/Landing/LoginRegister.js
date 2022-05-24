@@ -29,22 +29,37 @@ export default function LoginRegister() {
         setLoginOrRegister(value);
     };
 
-    const changeHandler = (e) => {
-        setDetails({[e.target.name]: e.target.value})
+    const redirectPage = () => {
+        // change it to create account
+        window.location =  "/infoMismatch"
     }
 
-    const submitHandler = (e) =>{
+    /*
+    TODO: register needs to authenticate user -> return
+    TODO: why is authenticate POST and not GET
+     */
+    const submitRegister = (e) =>{
         e.preventDefault()
-        console.log("this.state:")
-        console.log(details)
         axios.post('http://localhost:8081/api/customer/register', details).then(response => {
-            console.log(response.data)
-            console.log("here details")
-            console.log(details)
+            console.log(response)
+            redirectPage()
         }).catch(error => {
             console.log(error)
-            console.log("here details")
-            console.log(details)
+        })
+    }
+
+    const submitLogin = (e) =>{
+        e.preventDefault()
+        axios.post('http://localhost:8081/api/customer/authenticate', details).then(response => {
+            console.log(response.data)
+            if (response.data === "good to go") {
+                redirectPage()
+            } else {
+                //redirect somewhere else...
+            }
+
+        }).catch(error => {
+            console.log(error)
         })
     }
 
@@ -67,7 +82,7 @@ export default function LoginRegister() {
 
                     <MDBTabsContent>
                         <MDBTabsPane show={loginOrRegister === 'login'}>
-                            <form>
+                            <form onSubmit={submitLogin}>
                                 <div className='text-center mb-3'>
                                     <p>Sign up with:</p>
 
@@ -90,15 +105,29 @@ export default function LoginRegister() {
 
                                 <p className='text-center'>or:</p>
 
-                                <MDBInput className='mb-4 text-white' type='text' label='Username'/>
-                                <MDBInput className='mb-4 text-white' type='password' label='Password' />
+                                <MDBInput className='mb-4 text-white'
+                                          type='text'
+                                          label='Username'
+                                          name='username'
+                                          value={details.username}
+                                          onChange={(e) =>
+                                              setDetails({...details, username: e.target.value})}
+                                />
+                                <MDBInput className='mb-4 text-white'
+                                          type='password'
+                                          label='Password'
+                                          name="password"
+                                          value={details.password}
+                                          onChange={(e) =>
+                                              setDetails({...details, password: e.target.value})}
+                                />
 
                                 <MDBRow className='mb-4'>
                                     <MDBCol className='d-flex justify-content-center'>
                                         <MDBCheckbox label='Remember me' defaultChecked />
                                     </MDBCol>
                                     <MDBCol>
-                                        <a href='#!'>Forgot password?</a>
+                                        <a href='/questionAuth'>Forgot password?</a>
                                     </MDBCol>
                                 </MDBRow>
 
@@ -108,7 +137,7 @@ export default function LoginRegister() {
                             </form>
                         </MDBTabsPane>
                         <MDBTabsPane show={loginOrRegister === 'register'}>
-                            <form onSubmit={submitHandler}>
+                            <form onSubmit={submitRegister}>
                                 <MDBInput className='mb-4 text-white'
                                           type='text'
                                           label='Username'

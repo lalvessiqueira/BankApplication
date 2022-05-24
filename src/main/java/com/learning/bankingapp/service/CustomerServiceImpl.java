@@ -257,7 +257,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		if(customer!=null) {
 			
-			if (customer.getSecretQuestion().equals(question)&&customer.getSecretQuestion().equals(question))
+			if (customer.getSecretQuestion().equals(question) && customer.getSecretAnswer().equals(answer))
 				
 				return "Details validated";
 
@@ -267,7 +267,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 			
 		else 
-			return "User name do not found";
+			return "Username not found";
 	}
 
 	@Override

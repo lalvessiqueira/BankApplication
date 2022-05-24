@@ -111,7 +111,7 @@ public class CustomerController {
 		
 	}
 	
-	@PostMapping("{UserName}/forgot")
+	@PutMapping("{UserName}/forgot")
 	public String changePassword(@PathVariable ("UserName") String UserName, @RequestBody Customer customer) {
 
 			return customerService.changePassword (UserName,customer);
