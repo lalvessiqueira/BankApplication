@@ -1,53 +1,35 @@
 import React, {Component} from 'react';
+import {MDBBtn, MDBInput} from "mdb-react-ui-kit";
+import './Profile.css';
 
 class Profile extends Component {
     render() {
         return (
-            <div className='container mt-3 rounded-3' id='bg-glass'>
-                <form className="row g-3">
-                    <div className="col-md-3">
-                        <label className="form-label">Customer ID</label>
-                        <input type="email" className="form-control"/>
-                    </div>
-                    <div className="col-md-6">
-                        <label className="form-label">Full Name</label>
-                        <input type="password" className="form-control"/>
-                    </div>
-                    <div className="col-12">
-                        <label className="form-label">Address</label>
-                        <input type="text" className="form-control"placeholder="1234 Main St"/>
-                    </div>
-                    <div className="col-12">
-                        <label className="form-label">Address 2</label>
-                        <input type="text" className="form-control"
-                               placeholder="Apartment, studio, or floor"/>
-                    </div>
-                    <div className="col-md-6">
-                        <label htmlFor="inputCity" className="form-label">City</label>
-                        <input type="text" className="form-control" id="inputCity"/>
-                    </div>
-                    <div className="col-md-4">
-                        <label htmlFor="inputState" className="form-label">State</label>
-                        <select id="inputState" className="form-select">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div className="col-md-2">
-                        <label htmlFor="inputZip" className="form-label">Zip</label>
-                        <input type="text" className="form-control" id="inputZip"/>
-                    </div>
-                    <div className="col-12">
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="gridCheck"/>
-                                <label className="form-check-label" htmlFor="gridCheck">
-                                    Check me out
-                                </label>
-                        </div>
-                    </div>
-                    <div className="mb-3">
-                        <button type="submit" className="btn btn-primary">Sign in</button>
-                    </div>
+            <div className='container rounded-3' id='bg-glass'>
+                <form className='py-2'>
+                    <MDBInput className='mb-4' style={{color: 'black'}}
+                        label='Customer ID'
+                        placeholder='hb_123456'
+                        readonly
+
+                    />
+                    <MDBInput className='mb-4' type='text' label='Full Name' />
+                    <MDBInput className='mb-4' type='text' label='Phone #' />
+                    <MDBInput className='mb-4' type='text' label='Social Security #' />
+                    <MDBInput className='mb-4' type='text' label='State ID' />
+                    <select
+                        className="form-select mb-4"
+                        aria-label="Security Questions"
+                        name="secQuestion">
+                        <option selected>Select Security Question</option>
+                        <option value="Favorite Actor / Actress">Favorite Actor / Actress</option>
+                        <option value="Name of first pet">Name of first pet</option>
+                        <option value="Mother's Maiden Name">Mother's Maiden Name</option>
+                    </select>
+                    <MDBInput className='mb-4' type='text' label='Enter Answer' />
+                    <MDBBtn type='submit' className='mb-4'>
+                        Update
+                    </MDBBtn>
                 </form>
             </div>
         );

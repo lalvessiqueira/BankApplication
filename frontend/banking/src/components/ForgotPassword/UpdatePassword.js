@@ -22,7 +22,7 @@ class UpdatePassword extends Component {
         console.log(this.state)
         axios.put('http://localhost:8081/api/customer/' + this.state.username + "/forgot").then(response => {
             console.log(response.data)
-            if (response.data === "Sorry password not updated") {
+            if (response.data === "Error: password not updated") {
                 window.location =  "/infoMismatch"
             } else {
                 window.localStorage.setItem("username",this.state.username)
@@ -41,7 +41,7 @@ class UpdatePassword extends Component {
                 <form>
                     <MDBRow className='mb-4'>
                         <MDBCol>
-                            <MDBInput className='mt-4' label={this.state.username} disabled/>
+                            <MDBInput className='mt-4' label='Username' placeholder={this.state.username} readonly/>
                         </MDBCol>
                     </MDBRow>
 
