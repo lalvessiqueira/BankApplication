@@ -7,7 +7,11 @@ import SecQuesMismatch from "./components/ForgotPassword/SecQuesMismatch";
 import Landing from "./components/Landing/Landing";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import Profile from "./components/CustomerDash/CustomerFunctions/Profile";
+import CreateAccount from "./components/CustomerDash/CustomerFunctions/CreateAccount";
 
+
+//TODO: WHEN LOGGED OUT:
+//localStorage.removeItem(key);
 function App() {
     return (
         <React.StrictMode>
@@ -19,6 +23,7 @@ function App() {
                     <Route path="/updatePassword" element={<UpdatePassword/>}/>
                     <Route path="/infoMismatch" element={<SecQuesMismatch/>}/>
                     <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/createAccount" element={<CreateAccount/>}/>
                 </Routes>
             </BrowserRouter>
         </React.StrictMode>
