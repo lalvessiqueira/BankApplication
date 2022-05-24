@@ -1,32 +1,33 @@
 import React, {Component} from 'react';
-import './Landing.css';
-import LandingHeader from "./LandingHeader";
-import LandingCard from "./LandingCard";
-import LoginRegister from "./LoginRegister";
-import Footer from "./Footer";
-import LandingCardGroup from "./LandingCardGroup";
-import LandingTestimonials from "./LandingTestimonials";
+import './DashCustomer.css';
+import DashCustomerHeader from "./DashCustomerHeader";
+import DashSideBar from "./DashSideBar";
+import DashCustomerAcct from "./DashCustomerAcct";
+import Footer from "../Landing/Footer";
+import LandingCardGroup from "../Landing/LandingCardGroup";
 
-class Landing extends Component {
+class DashCustomer extends Component {
     render() {
         return (
             <div className="container">
                 <div className="row">
-                    <LandingHeader/>
+                    <DashCustomerHeader/>
                 </div>
                 <div>
                     <section>
-                        <div className="row">
+                        <div className="row justify-content-evenly">
                             <div className="col-md-6 mb-3">
-                                <LandingCard/>
+                                <DashSideBar/>
                             </div>
-                            <div className="col-md-6 mb-3">
-                                <LoginRegister/>
-                                <LandingTestimonials/>
+                            <div className="col-md-4 mb-3">
+                                <DashCustomerAcct/>
+                                <DashCustomerAcct/>
+                                <DashCustomerAcct/>
                             </div>
                         </div>
                     </section>
                 </div>
+
                 <div className="row my-5">
                     <h1 style={{color: "whitesmoke"}}>Financial guidance for every stage of life.</h1>
                     <h4 style={{color: "white"}}>Better Money Habits® is here to help with your decisions along the way.</h4>
@@ -40,4 +41,4 @@ class Landing extends Component {
     }
 }
 
-export default Landing;
+export default DashCustomer;

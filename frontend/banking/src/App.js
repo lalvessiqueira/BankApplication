@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import Landing from "./components/Landing/Landing";
-import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import UpdatePassword from "./components/ForgotPassword/UpdatePassword";
 import SecQuesMismatch from "./components/ForgotPassword/SecQuesMismatch";
+import Landing from "./components/Landing/Landing";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 
 function App() {
     return (
@@ -21,7 +21,7 @@ function App() {
                 </Routes>
             </BrowserRouter>
         </React.StrictMode>
-  );
+    )
 }
 
 export default App;

@@ -3,25 +3,21 @@ import { MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardL
 
 export default function DashSideBar() {
     return (
-        <MDBCard style={{ width: '18rem', color: 'black' }} id='bg-glass'>
-            <MDBCardImage position='top' alt='...' src='https://mdbootstrap.com/img/new/standard/city/062.webp' />
+        <MDBCard style={{  color: 'black' }} id='bg-glass'>
+            <MDBCardImage position='top' alt='...' src='https://iscdo.org/wp-content/uploads/2020/12/Article-04-HeaderImage-1130x650.jpg'/>
             <MDBCardBody>
-                <MDBCardTitle>Card title</MDBCardTitle>
+                <MDBCardTitle>Dashboard</MDBCardTitle>
                 <MDBCardText>
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                    Account Info and Access.
                 </MDBCardText>
             </MDBCardBody>
             <MDBListGroup flush>
-                <MDBListGroupItem style={{background: "none"}}>Create Account</MDBListGroupItem>
-                <MDBListGroupItem style={{background: "none"}}>Add Beneficiary</MDBListGroupItem>
-                <MDBListGroupItem style={{background: "none"}}>Remove Beneficiary</MDBListGroupItem>
-                <MDBListGroupItem style={{background: "none"}}>Transfer Funds</MDBListGroupItem>
-                <MDBListGroupItem style={{background: "none"}}>View Statement</MDBListGroupItem>
+                <MDBListGroupItem style={{background: "none"}}><MDBCardLink href='#'>Create Account</MDBCardLink></MDBListGroupItem>
+                <MDBListGroupItem style={{background: "none"}}><MDBCardLink href='#'>Add Beneficiary</MDBCardLink></MDBListGroupItem>
+                <MDBListGroupItem style={{background: "none"}}><MDBCardLink href='#'>Remove Beneficiary</MDBCardLink></MDBListGroupItem>
+                <MDBListGroupItem style={{background: "none"}}><MDBCardLink href='#'>Transfer Funds</MDBCardLink></MDBListGroupItem>
+                <MDBListGroupItem style={{background: "none"}}><MDBCardLink href='#'>View Statement</MDBCardLink></MDBListGroupItem>
             </MDBListGroup>
-            <MDBCardBody>
-                <MDBCardLink href='#'>Card link</MDBCardLink>
-                <MDBCardLink href='#'>Card link</MDBCardLink>
-            </MDBCardBody>
         </MDBCard>
     );
 }

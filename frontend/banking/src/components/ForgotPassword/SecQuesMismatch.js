@@ -11,8 +11,6 @@ export default function SecQuesMismatch() {
                 <p style={{color: "black"}}>Username, Security Question, & Security Answer are <strong>mismatched!</strong></p>
                 <p><a href='#!'>Try again</a></p>
             </div>
-
         </div>
-
     );
 }
