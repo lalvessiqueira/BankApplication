@@ -29,7 +29,7 @@ public class Customer extends User
 	//@Generated(GenerationTime.INSERT)
 	//@Column(name = "customerId", columnDefinition = "serial", updatable = false)
 	private String customerId;
-    private int phone;
+    private Long phone;
     private String StateID=null;
     private Long SSN;
     private String secretQuestion=null;

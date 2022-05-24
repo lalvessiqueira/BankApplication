@@ -5,7 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//<<<<<<< Updated upstream
 import org.springframework.web.bind.annotation.*;
+//=======
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+//>>>>>>> Stashed changes
 
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
@@ -21,11 +26,16 @@ public class CustomerController {
 	CustomerService customerService;
 	
 	@PostMapping("/register")
-	public Customer registerCustomer(@RequestBody Customer customer) {
-
+	public ResponseEntity<Object> registerCustomer(@RequestBody Customer customer) {
+		
+		try {
 		customerService.register(customer);
-		return customer;
-	}
+		return ResponseEntity.accepted().body(customer);
+		}
+		catch(Exception e) {
+			return ResponseEntity.badRequest().body("User Name in use");
+		}
+		}
 	
 	@PostMapping("/authenticate")
 	public String Authenticate(@RequestBody Customer customer) {
@@ -33,93 +43,162 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/{CustId}/account")
-	public Account createAccount(@PathVariable ("CustId") String CustId, @RequestBody Account account) {
-
-		return customerService.createAccount(CustId,account);
+	public ResponseEntity<Object> createAccount(@PathVariable ("CustId") String CustId, @RequestBody Account account) {
 		
-	}//IF DONT WORK "ACCOUNT CANNOT BE CREATED"
+		try {
+		Account acc = customerService.createAccount(CustId,account);
+		return ResponseEntity.accepted().body(acc);
+		}
+		catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Account cannot be created");
+		}
+	}
 	
 	@PostMapping("/{CustId}/account/{AccNo}")
-	public Account approveAccount(@PathVariable ("AccNo") String AccNo, @PathVariable ("CustId")String CustId, @RequestBody Account account) {
+	public ResponseEntity<Object> approveAccount(@PathVariable ("AccNo") String AccNo, @PathVariable ("CustId")String CustId, @RequestBody Account account) {
 
-		return customerService.approveAccount(CustId,AccNo,account);
-		
-	}//IF DONT WORK PLEASE CHECK ACCOUNT NUMBER
+		try {
+		Account acc = customerService.approveAccount(CustId,AccNo,account);
+		return ResponseEntity.accepted().body(acc);
+		}
+		catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Please check account number");
+		}
+	}
 	
 	@GetMapping("/{CustId}/account")
-	public List<Account> getAllAccountByCustId(@PathVariable("CustId") String CustId) {
-		return customerService.getAllAccount(CustId);
+	public ResponseEntity<Object> getAllAccountByCustId(@PathVariable("CustId") String CustId) {
+		
+		try {
+		List<Account> accounts = customerService.getAllAccount(CustId);
+		return ResponseEntity.accepted().body(accounts);
+		}
+		catch (Exception e) {
+			return ResponseEntity.badRequest().body("Please check customer ID");
+		}
 	}
 	
 	@GetMapping("/{CustId}")
-	public Customer getCustomerByCustId(@PathVariable("CustId") String CustId) {
-		return customerService.getCustomer(CustId);
-	}//"SORRY CUSTOMER WITH <ID> NOT FOUND"
-	
-	@PostMapping("/{CustId}")
-	public Customer updateCustomer(@PathVariable ("CustId") String CustId, @RequestBody Customer customer) {
-
-		return customerService.updateCustomer(CustId,customer);
-		
-	}//"SORRY CUSTOMER WITH <ID> NOT FOUND"
-	
-	@GetMapping("/{CustId}/account/{AccNo}")
-	public Optional<Account> getAccount(@PathVariable ("AccNo") String AccNo, @PathVariable ("CustId")String CustId) {
-
-		return customerService.getAccount(CustId,AccNo);
-		
-	}//"SORRY CUSTOMER WITH <ID> NOT FOUND"
-	
-	@PostMapping("/{CustId}/beneficiary")
-	public String addBeneficiary(@PathVariable ("CustId") String CustId, @RequestBody Beneficiary beneficiary) {
-
-			Beneficiary beneficiary2 = customerService.addBeneficiary(CustId,beneficiary);
-			
-			if (beneficiary2!=null)
-				return "Beneficiary with "+beneficiary.getBeneficiaryAcctNo()+" added";
-			else
-				return
-						"Beneficiary with "+beneficiary.getBeneficiaryAcctNo()+" not added";
+	public ResponseEntity<Object> getCustomerByCustId(@PathVariable("CustId") String CustId) {
+		try {
+		Customer cus = customerService.getCustomer(CustId);
+		if(cus==null)
+			throw new Exception();
+		return ResponseEntity.accepted().body(cus);
+		}
+		catch (Exception e) {
+			return ResponseEntity.badRequest().body("Sorry Customer with "+CustId+" not found");
+		}
 	}
 	
+	@PostMapping("/{CustId}")
+	public ResponseEntity<Object> updateCustomer(@PathVariable ("CustId") String CustId, @RequestBody Customer customer) {
+		try {
+		Customer cus = customerService.updateCustomer(CustId,customer);
+		return ResponseEntity.accepted().body(cus);
+		}
+		catch (Exception e) {
+			return ResponseEntity.badRequest().body("Sorry Customer with "+CustId+" not found");
+		}
+	}
+
+	
+	@GetMapping("/{CustId}/account/{AccNo}")
+	public ResponseEntity<Object> getAccount(@PathVariable ("AccNo") String AccNo, @PathVariable ("CustId")String CustId) {
+
+		try {
+		Account account = customerService.getAccount(CustId,AccNo);
+		if(account==null)
+			throw new Exception();
+		return ResponseEntity.accepted().body(account);
+		}
+		catch (Exception e) {
+			return ResponseEntity.badRequest().body("Sorry account not found");
+		}
+		
+	}
+	
+	@PostMapping("/{CustId}/beneficiary")
+	public ResponseEntity<String> addBeneficiary(@PathVariable ("CustId") String CustId, @RequestBody Beneficiary beneficiary) {
+			try {
+			Beneficiary beneficiary2 = customerService.addBeneficiary(CustId,beneficiary);
+			if (beneficiary2!=null)
+				return ResponseEntity.accepted().body("Beneficiary with "+beneficiary.getBeneficiaryAcctNo()+" added");
+			else
+				throw new Exception(); 
+			}
+			catch(Exception e) {
+		
+			return ResponseEntity.badRequest().body("Sorry Beneficiary with "+beneficiary.getBeneficiaryAcctNo()+" not added");
+	
+			}
+	}
+			
+	
 	@GetMapping("/{CustId}/beneficiary")
-	public List<Beneficiary> getAllBeneficiaryByCustId(@PathVariable("CustId") String CustId) {
-		return customerService.getAllBeneficiary(CustId);
+	public ResponseEntity<Object> getAllBeneficiaryByCustId(@PathVariable("CustId") String CustId) {
+		try {
+		List<Beneficiary> beneficiaries = customerService.getAllBeneficiary(CustId);
+		return ResponseEntity.accepted().body(beneficiaries);
+		}
+		catch (Exception e) {
+			return ResponseEntity.badRequest().body("Sorry Customer with "+CustId+" not found");
+		}
+		
 	}
 	
 	@DeleteMapping("/{CustId}/beneficiary/{BenId}")
-	public String deleteMobileById(@PathVariable("CustId") String CustId,@PathVariable("BenId") String BenId) {
-		
-		return customerService.deleteBeneficiary(CustId,BenId);
-	
+	public ResponseEntity<String> deleteMobileById(@PathVariable("CustId") String CustId,@PathVariable("BenId") String BenId) {
+		try {
+		String msg = customerService.deleteBeneficiary(CustId,BenId);
+		return ResponseEntity.accepted().body(msg);
+		}
+		catch (Exception e) {
+		return ResponseEntity.badRequest().body("Check Input");
+
+		}
 	}  
 	
 	@PostMapping("/transfer")
-	public String transfer(@RequestBody ArrayList <String>list) {
-
-		customerService.transfer(list);
+	public ResponseEntity<String> transfer(@RequestBody ArrayList <String>list) {
 		
-		return list.get(3);
-	}//"From/To Account Number Not Valid"
+		try {
+		customerService.transfer(list);
+		return ResponseEntity.accepted().body(list.get(3));
+		}
+		catch (Exception e) {
+			return ResponseEntity.badRequest().body("From/To Account Number not Valid");
+		}
+	}
 	
 	@GetMapping("/{UserName}/forgot/{Question}/{Answer}")
-	public String forgotPassword(@PathVariable("UserName") String userName,
+	public ResponseEntity<String> forgotPassword(@PathVariable("UserName") String userName,
 			@PathVariable("Question") String question,@PathVariable("Answer") String answer)
 	{
 		
-		return customerService.forgot(userName,question,answer);
+		try {
+			return ResponseEntity.accepted().body(customerService.forgot(userName,question,answer));
+			}
+			catch (Exception e) {
+				return ResponseEntity.badRequest().body("Sorry Customer with "+userName+" not found");
+			}
 		
 	}
 	
 	@PostMapping("{UserName}/forgot")
-	public String changePassword(@PathVariable ("UserName") String UserName, @RequestBody Customer customer) {
+	public ResponseEntity<String> changePassword(@PathVariable ("UserName") String UserName, @RequestBody Customer customer) {
 
-			return customerService.changePassword (UserName,customer);
+		try {
+			
+			return ResponseEntity.accepted().body(customerService.changePassword(UserName,customer));
+		}
+			
+			catch(Exception e) {
+				return ResponseEntity.badRequest().body("Sorry password not updated");
+			}
 		
 	}
 	
 	
 	
 }
-
-

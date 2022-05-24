@@ -14,6 +14,7 @@
     <name>BankingApp</name>
     <description>BankingApp</description>
     <properties>
+    
         <java.version>11</java.version>
     </properties>
     <dependencies>
@@ -41,6 +42,8 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+          
+        
     </dependencies>
 
     <build>

@@ -13,7 +13,7 @@ import com.learning.bankingapp.entity.Staff;
 public interface StaffService {
 	
 	public String security(Staff staff1);
-	public Optional<Account> staffgetAccount(String AccNo);
+	public Account staffgetAccount(String AccNo);
 	public List<Beneficiary> getBeneficiaryToApproved();
 	public Beneficiary approveBeneficiary(Beneficiary beneficiary);
 	public List<Account> getAccountToApproved();

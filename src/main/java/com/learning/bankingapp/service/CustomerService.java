@@ -17,7 +17,7 @@ public interface CustomerService {
 	public List<Account> getAllAccount(String CustId);
 	public Customer getCustomer(String CustId);
 	public Customer updateCustomer(String CustId,Customer customer);
-	public Optional<Account> getAccount(String CustId,String AccNo);
+	public Account getAccount(String CustId,String AccNo);
 	public Beneficiary addBeneficiary(String CustId,Beneficiary beneficiary);
 	public List<Beneficiary> getAllBeneficiary(String CustId);
 	public String deleteBeneficiary(String CustId,String BenId);
