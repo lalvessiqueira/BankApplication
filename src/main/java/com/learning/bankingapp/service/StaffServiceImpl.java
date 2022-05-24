@@ -50,9 +50,10 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public Optional<Account> staffgetAccount(String AccNo) {
+	public Account staffgetAccount(String AccNo) {
 		
-		return accountRepo.findById(AccNo);
+		Account account = accountRepo.findByAccountNumber(AccNo);
+		return account;
 	
 	}
 

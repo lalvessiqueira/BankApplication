@@ -7,5 +7,5 @@ import com.learning.bankingapp.entity.Account;
 
 @Repository
 public interface AccountRepo extends JpaRepository<Account, String>{
-
+	public Account findByAccountNumber(String AccNo);
 }

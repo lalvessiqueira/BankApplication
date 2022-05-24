@@ -81,8 +81,6 @@ public class CustomerServiceImpl implements CustomerService {
 	 return account2;
 	}
 	
-	
-	
 
 	@Override
 	public Account approveAccount(String CustId, String AccNo, Account account1) {
@@ -109,8 +107,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer getCustomer(String CustId) {
-	
-		return customerRepo.findBycustomerId(CustId);
+		Customer customer = customerRepo.findBycustomerId(CustId);
+		return customer;
 	}
 
 	@Override
@@ -130,9 +128,11 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Optional<Account> getAccount(String CustId, String AccNo) {
+	public Account getAccount(String CustId, String AccNo) {
 		
-		return accountRepo.findById(AccNo);
+		Account account = accountRepo.findByAccountNumber(AccNo);
+		
+		return account;
 		
 	}
 
@@ -254,7 +254,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public String forgot(String userName, String question,String answer) {
 		
 		Customer customer = customerRepo.findByusername(userName);
-		
+
 		if(customer!=null) {
 			
 			if (customer.getSecretQuestion().equals(question) && customer.getSecretAnswer().equals(answer))
@@ -270,21 +270,19 @@ public class CustomerServiceImpl implements CustomerService {
 			return "Username not found";
 	}
 
+	
+
 	@Override
 	public String changePassword(String userName, Customer customer1) {
 		
 		Customer customer2 = customerRepo.findByusername(userName);
-		
-		if(customer2!=null) {
 			
 			customer2.setPassword(customer1.getPassword());
 		
 			customerRepo.save(customer2);
 			
 			return "New password updated";
-		}
-		else 
-			return "Sorry password not updated";
+	
 	}
 
 
