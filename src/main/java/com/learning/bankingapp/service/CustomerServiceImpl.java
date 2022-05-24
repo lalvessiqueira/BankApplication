@@ -113,6 +113,12 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
+	public Customer getCustomerFromUsername(String username) {
+		Customer customer = customerRepo.findByusername(username);
+		return customer;
+	}
+
+	@Override
 	public Customer updateCustomer(String CustId, Customer customer1) {
 		
 		Customer customer2 = customerRepo.findBycustomerId(CustId);

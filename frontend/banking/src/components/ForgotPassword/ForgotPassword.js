@@ -19,22 +19,6 @@ class ForgotPassword extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    clicked = e => {
-        e.preventDefault()
-        console.log(this.state)
-    }
-
-    afterAuthentication = () => {
-        if (this.state.returnMessage === "Sorry your secret details are not matching" || this.state.returnMessage === "User name do not found") {
-
-        }
-    }
-
-    //
-    // setErrorMessage = () => {
-    //     let response = this.afterAuthentication;
-    // }
-
     submitHandler = e => {
         e.preventDefault()
         console.log("this.state:")

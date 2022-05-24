@@ -16,6 +16,7 @@ public interface CustomerService {
 	public Account approveAccount(String CustId, String AccNo,Account account);
 	public List<Account> getAllAccount(String CustId);
 	public Customer getCustomer(String CustId);
+	public Customer getCustomerFromUsername(String username);
 	public Customer updateCustomer(String CustId,Customer customer);
 	public Account getAccount(String CustId,String AccNo);
 	public Beneficiary addBeneficiary(String CustId,Beneficiary beneficiary);

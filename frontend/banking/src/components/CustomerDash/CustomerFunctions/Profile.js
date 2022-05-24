@@ -3,6 +3,20 @@ import {MDBBtn, MDBInput} from "mdb-react-ui-kit";
 import './Profile.css';
 
 class Profile extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            fullName: "",
+            customerId: "",
+            phone: 0,
+            secretQuestion: "",
+            secretAnswer: "",
+            stateID: null,
+            ssn: null
+        };
+    }
+
     render() {
         return (
             <div className='container rounded-3' id='bg-glass'>

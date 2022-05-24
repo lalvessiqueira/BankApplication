@@ -90,6 +90,19 @@ public class CustomerController {
 			return ResponseEntity.badRequest().body("Sorry Customer with "+CustId+" not found");
 		}
 	}
+
+	@GetMapping("/username/{Username}")
+	public ResponseEntity<Object> getCustomerByUsername(@PathVariable("Username") String username) {
+		try {
+			Customer cus = customerService.getCustomerFromUsername(username);
+			if(cus==null)
+				throw new Exception();
+			return ResponseEntity.accepted().body(cus);
+		}
+		catch (Exception e) {
+			return ResponseEntity.badRequest().body("Sorry Customer with "+username+" not found");
+		}
+	}
 	
 	@PostMapping("/{CustId}")
 	public ResponseEntity<Object> updateCustomer(@PathVariable ("CustId") String CustId, @RequestBody Customer customer) {

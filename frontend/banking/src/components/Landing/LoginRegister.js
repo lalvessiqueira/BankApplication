@@ -37,6 +37,7 @@ export default function LoginRegister() {
         e.preventDefault()
         axios.post('http://localhost:8081/api/customer/register', details).then(response => {
             console.log(response)
+            window.localStorage.setItem("username",details.username)
             window.location =  "/profile"
         }).catch(error => {
             console.log(error)
@@ -50,12 +51,14 @@ export default function LoginRegister() {
         axios.post('http://localhost:8081/api/customer/authenticate', details).then(response => {
             console.log(response.data)
             if (response.data === "good to go") {
+                window.localStorage.setItem("username",details.username)
                 window.location =  "/profile"
             } else {
                 window.location = "/infoMismatch"
             }
         }).catch(error => {
             console.log(error)
+            window.location = "/infoMismatch"
         })
     }
 

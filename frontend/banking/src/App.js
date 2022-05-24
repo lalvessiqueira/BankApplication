@@ -6,7 +6,7 @@ import UpdatePassword from "./components/ForgotPassword/UpdatePassword";
 import SecQuesMismatch from "./components/ForgotPassword/SecQuesMismatch";
 import Landing from "./components/Landing/Landing";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
-import Profile from "./components/CustomerDash/Profile";
+import Profile from "./components/CustomerDash/CustomerFunctions/Profile";
 
 function App() {
     return (
