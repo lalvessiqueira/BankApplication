@@ -19,7 +19,8 @@ class Landing extends Component {
                     <section>
                         <div className="row">
                             <div className="col-md-6 mb-3">
-                                <Profile/>
+                                {/*<Profile/>*/}
+                                <LandingCard/>
                             </div>
                             <div className="col-md-6 mb-3">
                                 <LoginRegister/>

@@ -182,7 +182,6 @@ public class CustomerController {
 			catch (Exception e) {
 				return ResponseEntity.badRequest().body("Sorry Customer with "+userName+" not found");
 			}
-		
 	}
 
 	@PutMapping("{UserName}/forgot")

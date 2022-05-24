@@ -29,11 +29,6 @@ export default function LoginRegister() {
         setLoginOrRegister(value);
     };
 
-    const redirectPage = () => {
-        // change it to create account
-        window.location =  "/infoMismatch"
-    }
-
     /*
     TODO: register needs to authenticate user -> return
     TODO: why is authenticate POST and not GET
@@ -42,22 +37,23 @@ export default function LoginRegister() {
         e.preventDefault()
         axios.post('http://localhost:8081/api/customer/register', details).then(response => {
             console.log(response)
-            redirectPage()
+            window.location =  "/profile"
         }).catch(error => {
             console.log(error)
+            // window.location = "/infoMismatch"
         })
     }
 
     const submitLogin = (e) =>{
         e.preventDefault()
+        console.log(details)
         axios.post('http://localhost:8081/api/customer/authenticate', details).then(response => {
             console.log(response.data)
             if (response.data === "good to go") {
-                redirectPage()
+                window.location =  "/profile"
             } else {
-                //redirect somewhere else...
+                window.location = "/infoMismatch"
             }
-
         }).catch(error => {
             console.log(error)
         })

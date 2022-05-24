@@ -6,6 +6,7 @@ import UpdatePassword from "./components/ForgotPassword/UpdatePassword";
 import SecQuesMismatch from "./components/ForgotPassword/SecQuesMismatch";
 import Landing from "./components/Landing/Landing";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import Profile from "./components/CustomerDash/Profile";
 
 function App() {
     return (
@@ -17,7 +18,7 @@ function App() {
                     <Route path="/questionAuth" element={<ForgotPassword/>}/>
                     <Route path="/updatePassword" element={<UpdatePassword/>}/>
                     <Route path="/infoMismatch" element={<SecQuesMismatch/>}/>
-                    {/*<Route path="/help" element={<Help/>}/>*/}
+                    <Route path="/profile" element={<Profile/>}/>
                 </Routes>
             </BrowserRouter>
         </React.StrictMode>

@@ -44,14 +44,15 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public String security(Customer customer1) {
 		
-		Customer customer2 = customerRepo.findBycustomerId(customer1.getCustomerId());
-		
-		if (customer2.getUsername().equals(customer1.getUsername()) &&
-				customer2.getPassword().equals(customer1.getPassword()) ) {
-			return "good to go";
+		Customer customer2 = customerRepo.findByusername(customer1.getUsername());
+		if (customer2 != null) {
+			if (customer2.getUsername().equals(customer1.getUsername()) &&
+					customer2.getPassword().equals(customer1.getPassword())) {
+				return "good to go";
+			} else
+				return "Not correct";
 		}
-		else
-			return "Not correct";
+		return "Customer not found";
 	}
 	
 	@Override
@@ -225,9 +226,7 @@ public class CustomerServiceImpl implements CustomerService {
 			transaction1.setTransactionDate(currentDate);
 			transaction1.setAccNo(fromAccNumber);
 			transaction1.setTransactionBy("Customer");
-			
 
-			
 			accountFrom.setAccountBalance(balanceFrom-amount);
 			accountFrom.getTransactions().add(transaction1);
 			
