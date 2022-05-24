@@ -7,10 +7,11 @@ import {
     MDBCardTitle,
     MDBListGroup, MDBListGroupItem, MDBCardLink
 } from 'mdb-react-ui-kit';
+import './LandingCard.css';
 
 export default function LandingCard() {
     return (
-        <MDBCard style={{ color:"black"}} id="bg-glass">
+        <MDBCard style={{ color:"white"}} id="bg-glass">
             <MDBCardImage position='top' alt='...' src='https://www.temenos.com/wp-content/uploads/2020/06/EIU-landscape.-altjpg.jpg' />
             <MDBCardBody>
                 <MDBCardTitle>Bankerr</MDBCardTitle>
@@ -23,8 +24,8 @@ export default function LandingCard() {
                 <MDBListGroupItem style={{background: "none"}}>Learn More</MDBListGroupItem>
             </MDBListGroup>
             <MDBCardBody>
-                <MDBCardLink href='#'><i className="fas fa-map-marker"></i> Find Near You</MDBCardLink>
-                <MDBCardLink href='#'><i className="fas fa-calendar-alt"></i> Schedule an Appointment</MDBCardLink>
+                <MDBCardLink href='#'><i className="fas fa-map-marker"/> Find Near You</MDBCardLink>
+                <MDBCardLink href='#'><i className="fas fa-calendar-alt"/> Schedule an Appointment</MDBCardLink>
             </MDBCardBody>
         </MDBCard>
     );

@@ -4,9 +4,7 @@ import {
     MDBCard,
     MDBCardBody,
     MDBCardText,
-    MDBCardTitle, MDBCheckbox,
     MDBCol,
-    MDBInput,
     MDBRow,
     MDBSwitch
 } from "mdb-react-ui-kit";

@@ -19,7 +19,7 @@ class DashCustomer extends Component {
                             <div className="col-md-6 mb-3">
                                 <DashSideBar/>
                             </div>
-                            <div className="col-md-4 mb-3">
+                            <div className="col-md-6 mb-3 text-center" >
                                 <DashCustomerAcct/>
                                 <DashCustomerAcct/>
                                 <DashCustomerAcct/>
