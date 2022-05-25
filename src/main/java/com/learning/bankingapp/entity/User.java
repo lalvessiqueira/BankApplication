@@ -30,13 +30,14 @@ public class User {
     private String fullName;
     @Column(name = "password")
     private String password;
+    private UserType usertype;
     
-    
-	public User(String username, String fullName, String password) {
+	public User(String username, String fullName, String password,UserType usertype ) {
 		super();
 		this.username = username;
 		this.fullName = fullName;
 		this.password = password;
+		this.usertype = usertype;
 	}
        
 }

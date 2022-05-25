@@ -24,8 +24,8 @@ import com.learning.bankingapp.enums.UserType;
 //@PrimaryKeyJoinColumn(referencedColumnName = "uid")
 public class Customer extends User
 {
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_seq")
-    @GenericGenerator(name = "user_seq", strategy = "com.learning.bankingapp.util.UserIdGenerator")
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_seq")
+   // @GenericGenerator(name = "user_seq", strategy = "com.learning.bankingapp.util.UserIdGenerator")
 	//@Generated(GenerationTime.INSERT)
 	//@Column(name = "customerId", columnDefinition = "serial", updatable = false)
 	private String customerId;
@@ -35,10 +35,15 @@ public class Customer extends User
     private String secretQuestion=null;
     private String secretAnswer=null;
     private EnableStatus status=EnableStatus.DISABLED;
-    private UserType usertype=UserType.CUSTOMER;
+   
 
 
-    @OneToMany(cascade = CascadeType.ALL) 
+    public Customer(String username, String fullName, String password, UserType usertype) {
+		super(username, fullName, password, usertype);
+		// TODO Auto-generated constructor stub
+	}
+
+	@OneToMany(cascade = CascadeType.ALL) 
     private List<Account> accounts;
 
     @OneToMany(cascade = CascadeType.ALL) 

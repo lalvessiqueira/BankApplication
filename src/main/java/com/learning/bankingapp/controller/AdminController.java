@@ -22,7 +22,7 @@ public class AdminController {
 	
 	@Autowired
 	AdminService adminService;
-	
+	/*
 	@PostMapping("/authenticate")
 	public String Authenticate(@RequestBody Admin admin) {
 		return adminService.security(admin);
@@ -41,7 +41,7 @@ public class AdminController {
 			
 			
 			
-	}
+	}*/
 	
 	@GetMapping("/staff")
 	public List<Staff> getAllStaff(){

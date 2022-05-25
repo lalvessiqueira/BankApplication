@@ -31,12 +31,12 @@ public class StaffController {
 	
 	@Autowired
 	StaffService staffService;
-	
+	/*
 	@PostMapping("/authenticate")
 	public String Authenticate(@RequestBody Staff staff) {
 		return staffService.security(staff);
 	}
-	
+	*/
 	@GetMapping("/account/{AccNo}")
 	public ResponseEntity<Object> getAllAccountByCustId(@PathVariable("AccNo") String AccNo) {
 		try {

@@ -18,6 +18,6 @@ import lombok.NoArgsConstructor;
 //@DiscriminatorValue (value = "Admin")
 public class Admin extends User
 {
-	private UserType usertype=UserType.ADMIN;
+	//private UserType usertype=UserType.ADMIN;
 
 }

@@ -24,7 +24,7 @@ public class CustomerController {
 	
 	@Autowired
 	CustomerService customerService;
-	
+	/*
 	@PostMapping("/register")
 	public ResponseEntity<Object> registerCustomer(@RequestBody Customer customer) {
 		
@@ -40,7 +40,7 @@ public class CustomerController {
 	@PostMapping("/authenticate")
 	public String Authenticate(@RequestBody Customer customer) {
 		return customerService.security(customer);
-	}
+	}*/
 	
 	@PostMapping("/{CustId}/account")
 	public ResponseEntity<Object> createAccount(@PathVariable ("CustId") String CustId, @RequestBody Account account) {
