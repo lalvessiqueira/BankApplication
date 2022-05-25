@@ -4,7 +4,7 @@ import {
     MDBCard,
     MDBCardBody,
     MDBCardText,
-    MDBCol,
+    MDBCol, MDBContainer,
     MDBRow,
     MDBSwitch
 } from "mdb-react-ui-kit";
@@ -12,26 +12,24 @@ import {
 class DashCustomerAcct extends Component {
     render() {
         return (
-            <div className='container'>
+            <MDBContainer>
                 <MDBCard id='bg-glass' className='mb-3'>
                     <MDBCardBody>
-                        <div className='row mb-3'>
+                        <MDBRow className='mb-3'>
                             <MDBCardText className='pe-5 mb-1'>Account Type: </MDBCardText>
                             <MDBCardText className='pe-4'>Account Balance: </MDBCardText>
-                        </div>
-                        <div>
-                            <MDBRow className='align-items-center'>
-                                <MDBCol size='auto'>
-                                    <MDBSwitch label='Disable/Enable' defaultChecked />
-                                </MDBCol>
-                                <MDBCol>
-                                    <MDBBtn type='submit' size='sm'>View More</MDBBtn>
-                                </MDBCol>
-                            </MDBRow>
-                        </div>
+                        </MDBRow>
+                        <MDBRow>
+                            <MDBCol size='auto'>
+                                <MDBSwitch label='Disable/Enable' defaultChecked />
+                            </MDBCol>
+                            <MDBCol>
+                                <MDBBtn type='submit' size='sm'>View More</MDBBtn>
+                            </MDBCol>
+                        </MDBRow>
                     </MDBCardBody>
                 </MDBCard>
-            </div>
+            </MDBContainer>
         );
     }
 }

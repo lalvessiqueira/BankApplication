@@ -4,6 +4,7 @@ package com.learning.bankingapp.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +23,15 @@ import com.learning.bankingapp.Repo.StaffRepo;
 import com.learning.bankingapp.Repo.UserRepository;
 import com.learning.bankingapp.entity.Customer;
 import com.learning.bankingapp.entity.Staff;
-import com.learning.bankingapp.entity.User;
 import com.learning.bankingapp.enums.UserType;
 import com.learning.bankingapp.jwt.JwtUtils;
+import com.learning.bankingapp.payload.request.ChangePassword;
 import com.learning.bankingapp.payload.request.LoginRequest;
 import com.learning.bankingapp.payload.request.SignupRequest;
 import com.learning.bankingapp.payload.response.JwtResponse;
 import com.learning.bankingapp.payload.response.MessageResponse;
+import com.learning.bankingapp.service.AdminService;
+import com.learning.bankingapp.service.CustomerService;
 import com.learning.bankingapp.service.UserDetailsImpl;
 
 
@@ -45,6 +49,12 @@ public class AuthController {
  CustomerRepo customerRepository;
   
   @Autowired
+  AdminService adminService;
+  
+  @Autowired
+  CustomerService customerService;
+  
+  @Autowired
   StaffRepo staffRepository;
 
   @Autowired
@@ -53,6 +63,7 @@ public class AuthController {
   @Autowired
   JwtUtils jwtUtils;
 
+  //authenticate Customer username and password
   @PostMapping("/customer/authenticate")
   public ResponseEntity<?> authenticateCustomer(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -70,6 +81,8 @@ public class AuthController {
                          userDetails.getUsertype()));
   }
   
+  //authenticate Staff username and password
+
   @PostMapping("/staff/authenticate")
   public ResponseEntity<?> authenticateStaff(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -87,6 +100,7 @@ public class AuthController {
                          userDetails.getUsertype()));
   }
   
+  //authenticate Admin username and password
   @PostMapping("/Admin/authenticate")
   public ResponseEntity<?> authenticateAdmin(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -104,43 +118,70 @@ public class AuthController {
                          userDetails.getUsertype()));
   }
 
+  //Register Customer
   @PostMapping("/customer/register")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+	  
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity
-          .badRequest()
+    		  .status(HttpStatus.FORBIDDEN)
           .body(new MessageResponse("Error: Username is already taken!"));
     }
 
-    // Create new user's account
     Customer customer = new Customer(signUpRequest.getUsername(), 
-               signUpRequest.getFullname(),
+               signUpRequest.getFullName(),
                encoder.encode(signUpRequest.getPassword()),
                UserType.CUSTOMER);
 
-    customerRepository.save(customer);
-
-    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		customerService.register(customer);
+		
+		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	  
   }
   
+  //Register Customer
   @PostMapping("/admin/staff")
   public ResponseEntity<?> registerStaff(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity
-          .badRequest()
-          .body(new MessageResponse("Error: Username is already taken!"));
+    		  .status(HttpStatus.FORBIDDEN)
+    		  .body(new MessageResponse("Error: Username is already taken!"));
     }
 
-    // Create new user's account
    Staff staff= new Staff(signUpRequest.getUsername(), 
-               signUpRequest.getFullname(),
+               signUpRequest.getFullName(),
                encoder.encode(signUpRequest.getPassword()),
                UserType.STAFF);
 
-    staffRepository.save(staff);
+		adminService.createStaff(staff);
+		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 
-    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
+  
+  //Change Password
+  @PostMapping("customer/{UserName}/forgot")
+  public ResponseEntity<String> changePassword(@PathVariable ("UserName") String UserName,@Valid @RequestBody ChangePassword changePassword) {
+
+   Customer customer= new Customer(encoder.encode(changePassword.getPassword()));
+
+   try {
+		
+		return ResponseEntity.ok(customerService.changePassword(UserName,customer));
+	}
+
+		catch(Exception e) {
+			return ResponseEntity.badRequest().body("Sorry password not updated");
+		}
+
+  }
+
+  
+  
 }
   
+	
+		
+		
+
+
 

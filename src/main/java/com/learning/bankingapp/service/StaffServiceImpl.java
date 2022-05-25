@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -144,7 +143,7 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public void transfer(ArrayList<String> list) {
+	public void transfer(ArrayList<String> list) throws Exception {
 		
 		Date currentDate = Calendar.getInstance().getTime();
 
@@ -189,7 +188,10 @@ public class StaffServiceImpl implements StaffService {
 			accountRepo.save(accountFrom);
 			accountRepo.save(accountTo);
 		}
+		
 		}
+		else 
+			throw new Exception();
 		
 	}
 	

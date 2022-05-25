@@ -39,5 +39,12 @@ public class User {
 		this.password = password;
 		this.usertype = usertype;
 	}
+
+	public User(String password) {
+		super();
+		this.password = password;
+	}
+	
+	
        
 }

@@ -2,7 +2,6 @@ package com.learning.bankingapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
@@ -21,5 +20,5 @@ public interface StaffService {
 	public List<Customer> getAllCustomer();
 	public Customer enableCustomer(Customer customer);
 	public Customer getCustomerById(String CustId) ;
-	public void transfer(ArrayList<String> list);
+	public void transfer(ArrayList<String> list) throws Exception;
 }

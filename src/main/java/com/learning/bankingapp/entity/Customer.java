@@ -7,9 +7,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.learning.bankingapp.enums.EnableStatus;
 import com.learning.bankingapp.enums.UserType;
@@ -24,10 +21,7 @@ import com.learning.bankingapp.enums.UserType;
 //@PrimaryKeyJoinColumn(referencedColumnName = "uid")
 public class Customer extends User
 {
-	//@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_seq")
-   // @GenericGenerator(name = "user_seq", strategy = "com.learning.bankingapp.util.UserIdGenerator")
-	//@Generated(GenerationTime.INSERT)
-	//@Column(name = "customerId", columnDefinition = "serial", updatable = false)
+	
 	private String customerId;
     private Long phone;
     private String StateID=null;
@@ -49,6 +43,9 @@ public class Customer extends User
     @OneToMany(cascade = CascadeType.ALL) 
     private List<Beneficiary> beneficiaries;
 
-
+    public Customer(String password) {
+		super(password);
+		
+	}
 
 }

@@ -2,7 +2,6 @@ package com.learning.bankingapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
@@ -22,7 +21,7 @@ public interface CustomerService {
 	public Beneficiary addBeneficiary(String CustId,Beneficiary beneficiary);
 	public List<Beneficiary> getAllBeneficiary(String CustId);
 	public String deleteBeneficiary(String CustId,String BenId);
-	public void transfer(ArrayList<String> list);
+	public void transfer(ArrayList<String> list) throws Exception;
 	public String forgot(String userName, String question, String answer);
 	public String changePassword (String UserName,Customer customer);
 	
