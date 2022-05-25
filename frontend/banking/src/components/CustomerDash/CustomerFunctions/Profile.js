@@ -42,7 +42,7 @@ class Profile extends Component {
         console.log(this.state)
         axios.post('http://localhost:8081/api/customer/' + this.state.customerId, this.state).then(response => {
             console.log(response.data)
-            window.localStorage.setItem("customerId",this.state.customerId)
+            window.localStorage.setItem("username",this.state.username)
             window.location =  "/createAccount"
         }).catch(error => {
             console.log(error)

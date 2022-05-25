@@ -6,33 +6,42 @@ import LoginRegister from "./LoginRegister";
 import Footer from "./Footer";
 import LandingCardGroup from "./LandingCardGroup";
 import LandingTestimonials from "./LandingTestimonials";
-import CreateAccount from "../CustomerDash/CustomerFunctions/CreateAccount";
+import DashCustomerHeader from "../CustomerDash/DashCustomerHeader";
+import DashSideBar from "../CustomerDash/DashSideBar";
+import CustomerFunctions from "../CustomerDash/CustomerFunctions/CustomerFunctions";
 
 class Landing extends Component {
+    constructor(props) {
+        super(props);
+        // window.localStorage.setItem("username", null)
+        this.state = {
+            // isLoggedIn: window.localStorage.getItem("username") === null
+            isLoggedIn: true
+        };
+    }
+
     render() {
         return (
             <div className="container">
                 <div className="row">
-                    <LandingHeader/>
+                    {this.state.isLoggedIn ? <DashCustomerHeader/> :  <LandingHeader/> }
                 </div>
                 <div>
                     <section>
                         <div className="row">
                             <div className="col-md-6 mb-3">
-                                <LandingCard/>
-                                {/*<CreateAccount/>*/}
+                                {this.state.isLoggedIn ? <DashSideBar/> : <LandingCard/> }
+                                {/* <CreateAccount/>*/}
                             </div>
                             <div className="col-md-6 mb-3">
-                                <LoginRegister/>
-                                <LandingTestimonials/>
+                                {this.state.isLoggedIn ? <CustomerFunctions/> : <LoginRegister/>}
+                                {this.state.isLoggedIn ? null : <LandingTestimonials/> }
                             </div>
                         </div>
                     </section>
                 </div>
                 <div className="row my-5">
-                    <h1 style={{color: "whitesmoke"}}>Financial guidance for every stage of life.</h1>
-                    <h4 style={{color: "white"}}>Better Money Habits® is here to help with your decisions along the way.</h4>
-                    <LandingCardGroup/>
+                    {this.state.isLoggedIn ? "" : <LandingCardGroup/>}
                 </div>
                 <div className="row">
                     <Footer/>

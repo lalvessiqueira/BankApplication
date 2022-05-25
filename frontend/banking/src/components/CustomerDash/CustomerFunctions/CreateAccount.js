@@ -6,7 +6,8 @@ class CreateAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            customerId: window.localStorage.getItem("customerId"),
+            username: window.localStorage.getItem("username"),
+            customerId: "",
             accountBalance: 0.0,
             accountType: "",
             approved: "no",
@@ -17,17 +18,17 @@ class CreateAccount extends Component {
     }
 
 
-    // componentDidMount() {
-    //     const id = localStorage.getItem("id");
-    //     const jsonId = { id: id };
-    //     axios.get("http://localhost:8081/api/customer/username/" + this.state.username)
-    //         .then((response) => {
-    //             this.setState({customerId: response.data.customerId});
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         });
-    // }
+    componentDidMount() {
+        const id = localStorage.getItem("id");
+        const jsonId = { id: id };
+        axios.get("http://localhost:8081/api/customer/username/" + this.state.username)
+            .then((response) => {
+                this.setState({customerId: response.data.customerId});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
 
     changeHandler = e => {
         this.setState({[e.target.name]: e.target.value})

@@ -3,6 +3,9 @@ import { MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardF
 
 export default function LandingCardGroup() {
     return (
+        <div>
+            <h1 style={{color: "whitesmoke"}}>Financial guidance for every stage of life.</h1>
+            <h4 style={{color: "white"}}>Better Money Habits® is here to help with your decisions along the way.</h4>
         <MDBRow className='row-cols-1 row-cols-md-3 mt-4 mx-0'>
             <MDBCol>
                 <MDBCard background='dark' className='text-white h-100'>
@@ -59,5 +62,6 @@ export default function LandingCardGroup() {
                 </MDBCard>
             </MDBCol>
         </MDBRow>
+        </div>
     );
 }
