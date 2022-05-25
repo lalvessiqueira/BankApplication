@@ -3,21 +3,26 @@ package com.learning.bankingapp.payload.request;
 
 import javax.validation.constraints.*;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.learning.bankingapp.enums.UserType;
 
 public class SignupRequest {
-  @NotBlank
-  @Size(min = 3, max = 20)
-  private String username;
+	
+	@NotBlank (message = "username must not be blank")
+	@Size(max = 20,message = "username must be between 2-30 characters.")
+	private String username;
 
-  @NotBlank
-  @Size(max = 50)
+  @NotBlank (message = "fullName must not be blank")
+  @Length(min = 2, max = 30, message = "fullName must be between 2-30 characters. ")
+  @Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$", message = "fullName is invalid.")
+ // @Size(max = 50)
   private String fullName;
 
   private UserType usertype;
 
-  @NotBlank
-  @Size(min = 6, max = 40)
+  @NotBlank (message = "password must not be blank")
+  @Size(min = 6, max = 40,message = "Password must be between 6-40 characters")
   private String password;
 
   public String getUsername() {

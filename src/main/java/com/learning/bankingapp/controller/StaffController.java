@@ -2,7 +2,6 @@ package com.learning.bankingapp.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
 import com.learning.bankingapp.entity.Customer;
-import com.learning.bankingapp.entity.Staff;
 import com.learning.bankingapp.service.StaffService;
 
 @RestController
@@ -37,12 +35,8 @@ public class StaffController {
 	
 	@Autowired
 	StaffService staffService;
-	/*
-	@PostMapping("/authenticate")
-	public String Authenticate(@RequestBody Staff staff) {
-		return staffService.security(staff);
-	}
-	*/
+
+	//Get all accounts
 	@GetMapping("/account/{AccNo}")
 	public ResponseEntity<Object> getAllAccountByCustId(@PathVariable("AccNo") String AccNo) {
 		try {
@@ -56,7 +50,7 @@ public class StaffController {
 		}
 	}
 		
-	
+	//get all beneficiaries
 	@GetMapping("/beneficiary")
 	public ResponseEntity<Object> getAllBeneficiaryToApproved(){
 		try {
@@ -68,6 +62,7 @@ public class StaffController {
 		}
 	}
 
+	//approve beneficiary
 	@PostMapping("/beneficiary")
 	public ResponseEntity<Object> approveBeneficiary( @RequestBody Beneficiary beneficiary) {
 		try {
@@ -80,6 +75,7 @@ public class StaffController {
 		
 	}
 	
+	//get all account that need approved
 	@GetMapping("/accounts/approve")
 	public ResponseEntity<Object> getAllAccountsToApproved(){
 		try {
@@ -91,6 +87,7 @@ public class StaffController {
 		}
 	}
 	
+	//Approve account
 	@PostMapping("/accounts/approve")
 	public ResponseEntity<Object> approveAccount( @RequestBody Account accounts) {
 		try {
@@ -105,6 +102,7 @@ public class StaffController {
 
 	}
 	
+	//get all customers
 	@GetMapping("/customer")
 	public ResponseEntity<Object> getAllCustomer(){
 		try {
@@ -117,6 +115,7 @@ public class StaffController {
 		}
 	}
 	
+	//enable customer
 	@PostMapping("/customer")
 	public ResponseEntity<Object> enableCustomer( @RequestBody Customer customer) {
 
@@ -131,7 +130,7 @@ public class StaffController {
 			
 	}
 	
-	
+	//get customer by ID
 	@GetMapping("/customer/{CustId}")
 	public ResponseEntity<Object> getCustomerById(@PathVariable("CustId") String CustId) {
 	
@@ -148,6 +147,7 @@ public class StaffController {
 		
 	}
 	
+	//transfer money from one account to another
 	@PostMapping("/transfer")
 	public ResponseEntity<String> transfer(@RequestBody ArrayList <String>list) {
 
@@ -161,6 +161,7 @@ public class StaffController {
 		
 	}
 	
+	//logout
 	@PostMapping("/logout")
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -31,17 +31,14 @@ public class Account {
     private EnableStatus accountStatus=EnableStatus.DISABLED; 
     private String AproverName;
    
-    
-   // @ManyToOne
-  //@JoinTable(name="emp_addr_tbl",joinColumns = @JoinColumn (name="empId"))
-  // Customer customer;
 
     private String CustomerId;
     private String customerName;
     
-    @OneToMany(cascade = CascadeType.ALL) // One customer can have multiple accounts
+    // One customer can have multiple accounts
     // create separate table to denote acct owner, joined by customer idCustomer
-//    @JoinTable(name = "account_owner", joinColumns = @JoinColumn(name = "customerId"))
+    @OneToMany(cascade = CascadeType.ALL) 
+    //@JoinTable(name = "account_owner", joinColumns = @JoinColumn(name = "customerId"))
     private List<Transaction> transactions;
     
 

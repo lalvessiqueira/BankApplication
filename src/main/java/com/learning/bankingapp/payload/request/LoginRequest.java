@@ -3,10 +3,10 @@ package com.learning.bankingapp.payload.request;
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
-	@NotBlank
+	@NotBlank (message = "username must not be blank")
   private String username;
 
-	@NotBlank
+	@NotBlank (message = "password must not be blank")
 	private String password;
 
 	public String getUsername() {

@@ -122,7 +122,6 @@ public class AuthController {
   @PostMapping("/customer/register")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 	  
-	  
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity
     		  .status(HttpStatus.FORBIDDEN)
@@ -137,7 +136,7 @@ public class AuthController {
 		customerService.register(customer);
 		
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-	
+	  
   }
   
   //Register Customer

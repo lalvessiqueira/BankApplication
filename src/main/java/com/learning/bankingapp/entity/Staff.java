@@ -20,7 +20,7 @@ public class Staff extends User{
 	
 	private String staffId;
     private EnableStatus status=EnableStatus.DISABLED;
-   // private UserType usertype=UserType.STAFF;
+    
 	public Staff(String username, String fullName, String password, UserType usertype) {
 		super(username, fullName, password, usertype);
 		// TODO Auto-generated constructor stub

@@ -1,15 +1,10 @@
 package com.learning.bankingapp.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
@@ -51,7 +46,8 @@ public class UserDetailsImpl implements UserDetails {
 	  List<GrantedAuthority> authorities = po.stream()
 		        .map(role -> new SimpleGrantedAuthority(user.getUsertype().name()))
 		        .collect(Collectors.toList());
-*/
+	  */
+	  
     return new UserDetailsImpl(
         user.getUid(), 
         user.getUsername(), 

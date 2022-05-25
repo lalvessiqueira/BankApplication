@@ -194,21 +194,8 @@ public class CustomerController {
 				return ResponseEntity.badRequest().body("Sorry Customer with "+userName+" not found");
 			}
 	}
-/*
-	//Change Password
-	@PostMapping("{UserName}/forgot")
-	public ResponseEntity<String> changePassword(@PathVariable ("UserName") String UserName, @RequestBody Customer customer) {
-		try {
-			
-			return ResponseEntity.ok(customerService.changePassword(UserName,customer));
-		}
-
-			catch(Exception e) {
-				return ResponseEntity.badRequest().body("Sorry password not updated");
-			}
-		
-	}*/
 	
+	//logout
 	@PostMapping("/logout")
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();

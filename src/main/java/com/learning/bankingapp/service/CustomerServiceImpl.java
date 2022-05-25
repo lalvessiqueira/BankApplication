@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +15,7 @@ import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
 import com.learning.bankingapp.entity.Customer;
 import com.learning.bankingapp.entity.Transaction;
+import com.learning.bankingapp.enums.AccountType;
 import com.learning.bankingapp.enums.TransactionType;
 
 
@@ -56,13 +55,14 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
-	public Account createAccount(String CustId, Account account1) {
+	public Account createAccount(String CustId, Account account1)  {
 
 		Date currentDate = Calendar.getInstance().getTime();
 		
 		Customer customer = customerRepo.findBycustomerId(CustId);
 		Account account2= new Account();
-		
+	
+			
 		account2.setAccountType(account1.getAccountType());
 		account2.setAccountBalance(account1.getAccountBalance());
 		account2.setDateOfCreation(currentDate);

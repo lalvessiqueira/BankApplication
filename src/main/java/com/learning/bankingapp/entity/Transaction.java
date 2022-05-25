@@ -29,10 +29,6 @@ public class Transaction {
 	private double amount;
 	private TransactionType type;
 	
-
-	//@ManyToOne
-	//private Account account;
-	
 	 private String AccNo;
 	
 }
