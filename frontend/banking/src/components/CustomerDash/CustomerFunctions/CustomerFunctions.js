@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import CreateAccount from "./CreateAccount";
 import AddBeneficiary from "./AddBeneficiary";
-import axios from "axios";
 import RemoveBeneficiary from "./RemoveBeneficiary";
 import Profile from "./Profile";
 
