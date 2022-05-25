@@ -16,7 +16,9 @@ export default function DashSideBar({setView}) {
             <MDBCard id='bg-glass'>
                 <MDBCardImage position='top' alt='...' src='https://iscdo.org/wp-content/uploads/2020/12/Article-04-HeaderImage-1130x650.jpg'/>
                 <MDBCardBody>
-                    <MDBCardTitle>Dashboard</MDBCardTitle>
+                    <MDBCardTitle>
+                        <MDBCardLink href='#' onClick={()=>onButtonClick('0')}>Dashboard</MDBCardLink>
+                    </MDBCardTitle>
                     <MDBCardText>
                         Account Info and Access.
                     </MDBCardText>
