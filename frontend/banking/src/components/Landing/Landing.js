@@ -17,12 +17,6 @@ import CustomerFunctions from "../CustomerDash/CustomerFunctions/CustomerFunctio
 class Landing extends Component {
     constructor(props) {
         super(props);
-        // window.localStorage.setItem("username", null)
-        this.state = {
-            // isLoggedIn: window.localStorage.getItem("username") === null
-            isLoggedIn: true,
-            selectedMode: "open"
-        };
     }
 
     render() {

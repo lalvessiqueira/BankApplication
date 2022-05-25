@@ -38,8 +38,7 @@ export default function LoginRegister({setIsLoggedIn}) {
         axios.post('http://localhost:8081/api/customer/register', details).then(response => {
             console.log(response)
             window.localStorage.setItem("username",details.username)
-            setIsLoggedIn(true)
-            // window.location =  "/profile"
+            setIsLoggedIn(response.data)
         }).catch(error => {
             console.log(error)
             // window.location = "/infoMismatch"
@@ -51,13 +50,9 @@ export default function LoginRegister({setIsLoggedIn}) {
         console.log(details)
         axios.post('http://localhost:8081/api/customer/authenticate', details).then(response => {
             console.log(response.data)
-            if (response.data === "good to go") {
-                window.localStorage.setItem("username",details.username)
-                setIsLoggedIn(true)
-                // window.location =  "/profile"
-            } else {
-                window.location = "/infoMismatch"
-            }
+            window.localStorage.setItem("username",details.username)
+            setIsLoggedIn(true)
+
         }).catch(error => {
             console.log(error)
             window.location = "/infoMismatch"
