@@ -21,5 +21,5 @@ public interface StaffService {
 	public List<Customer> getAllCustomer();
 	public Customer enableCustomer(Customer customer);
 	public Customer getCustomerById(String CustId) ;
-	public void transfer(ArrayList<String> list);
+	public void transfer(ArrayList<String> list) throws Exception;
 }
