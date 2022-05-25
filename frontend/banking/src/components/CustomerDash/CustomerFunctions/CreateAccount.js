@@ -47,7 +47,6 @@ class CreateAccount extends Component {
 
     render() {
         return (
-            <div>
                 <div className='container rounded-3 d-flex justify-content-center' id='bg-glass'>
                     <form onSubmit={this.submitHandler} className='py-2'>
                         <p className='text-uppercase fw-bold fs-4'>Create Account</p>
@@ -76,11 +75,10 @@ class CreateAccount extends Component {
                                       onChange={this.changeHandler}/>
                         </div>
 
-                        <MDBBtn type='submit' className='mb-4'>
-                            Update
+                        <MDBBtn type='submit' className='my-2'>
+                            Create Account
                         </MDBBtn>
-                    </form>
-                </div>
+                </form>
             </div>
         );
     }
