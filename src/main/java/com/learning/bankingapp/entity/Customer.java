@@ -49,6 +49,9 @@ public class Customer extends User
     @OneToMany(cascade = CascadeType.ALL) 
     private List<Beneficiary> beneficiaries;
 
-
+    public Customer(String password) {
+		super(password);
+		
+	}
 
 }

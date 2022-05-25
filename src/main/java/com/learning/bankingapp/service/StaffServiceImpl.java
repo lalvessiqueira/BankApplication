@@ -144,7 +144,7 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public void transfer(ArrayList<String> list) {
+	public void transfer(ArrayList<String> list) throws Exception {
 		
 		Date currentDate = Calendar.getInstance().getTime();
 
@@ -189,7 +189,10 @@ public class StaffServiceImpl implements StaffService {
 			accountRepo.save(accountFrom);
 			accountRepo.save(accountTo);
 		}
+		
 		}
+		else 
+			throw new Exception();
 		
 	}
 	

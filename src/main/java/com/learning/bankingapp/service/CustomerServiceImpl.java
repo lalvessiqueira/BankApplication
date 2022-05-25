@@ -205,7 +205,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void transfer(ArrayList<String> list) {
+	public void transfer(ArrayList<String> list) throws Exception  {
 		
 		Date currentDate = Calendar.getInstance().getTime();
 		
@@ -252,6 +252,8 @@ public class CustomerServiceImpl implements CustomerService {
 			accountRepo.save(accountFrom);
 		}
 		}
+		else 
+			throw new Exception();
 		
 	}
 

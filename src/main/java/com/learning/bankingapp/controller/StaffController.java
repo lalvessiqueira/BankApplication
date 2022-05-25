@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 //<<<<<<< Updated upstream
 import org.springframework.web.bind.annotation.*;
 //=======
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +49,7 @@ public class StaffController {
 			Account acc = staffService.staffgetAccount(AccNo);
 			if(acc==null)
 				throw new Exception();
-			return ResponseEntity.accepted().body(acc);
+			return ResponseEntity.ok(acc);
 		}
 		catch (Exception e) {
 			return ResponseEntity.badRequest().body("Account not found");
@@ -55,7 +61,7 @@ public class StaffController {
 	public ResponseEntity<Object> getAllBeneficiaryToApproved(){
 		try {
 		List<Beneficiary> beneficiaries = staffService.getBeneficiaryToApproved();
-		return ResponseEntity.accepted().body(beneficiaries);
+		return ResponseEntity.ok(beneficiaries);
 		}
 		catch(Exception e) {
 			return ResponseEntity.badRequest().body("Account not found");
@@ -78,7 +84,7 @@ public class StaffController {
 	public ResponseEntity<Object> getAllAccountsToApproved(){
 		try {
 			List<Account> accounts = staffService.getAccountToApproved();
-			return ResponseEntity.accepted().body(accounts);
+			return ResponseEntity.ok(accounts);
 		}
 		catch (Exception e) {
 			return ResponseEntity.badRequest().body("Sorry benficiary not found");
@@ -89,7 +95,7 @@ public class StaffController {
 	public ResponseEntity<Object> approveAccount( @RequestBody Account accounts) {
 		try {
 			Account acc = staffService.approveAccount(accounts);
-			return ResponseEntity.accepted().body(acc);
+			return ResponseEntity.ok(acc);
 
 		}
 		catch (Exception e) {
@@ -103,7 +109,7 @@ public class StaffController {
 	public ResponseEntity<Object> getAllCustomer(){
 		try {
 		List<Customer> customers =staffService.getAllCustomer();
-		return ResponseEntity.accepted().body(customers);
+		return ResponseEntity.ok(customers);
 		}
 		catch (Exception e) {
 			return ResponseEntity.badRequest().body("");
@@ -116,7 +122,7 @@ public class StaffController {
 
 			try {
 				Customer cus = staffService.enableCustomer(customer);
-				return ResponseEntity.accepted().body(cus);
+				return ResponseEntity.ok(cus);
 				}
 				catch (Exception e) {
 					return ResponseEntity.badRequest().body("Customer Status not Changed");
@@ -133,7 +139,7 @@ public class StaffController {
 		Customer cus = staffService.getCustomerById(CustId);
 		if(cus==null)
 			throw new Exception();
-		return ResponseEntity.accepted().body(cus);
+		return ResponseEntity.ok(cus);
 		}
 		catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Customer not found");
@@ -147,12 +153,21 @@ public class StaffController {
 
 		try {
 			staffService.transfer(list);
-			return ResponseEntity.accepted().body(list.get(3));
+			return ResponseEntity.ok("Transaction completed");
 			}
 			catch (Exception e) {
 				return ResponseEntity.badRequest().body("From/To Account Number not Valid");
 			}
 		
+	}
+	
+	@PostMapping("/logout")
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	if (auth != null){
+	new SecurityContextLogoutHandler().logout(request, response, auth);
+	}
+	return "redirect:/register";
 	}
 	
 }
