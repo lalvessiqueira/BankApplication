@@ -10,13 +10,18 @@ import DashCustomerHeader from "../CustomerDash/DashCustomerHeader";
 import DashSideBar from "../CustomerDash/DashSideBar";
 import CustomerFunctions from "../CustomerDash/CustomerFunctions/CustomerFunctions";
 
+// export default function Landing() {
+//     const[]
+// }
+
 class Landing extends Component {
     constructor(props) {
         super(props);
         // window.localStorage.setItem("username", null)
         this.state = {
             // isLoggedIn: window.localStorage.getItem("username") === null
-            isLoggedIn: true
+            isLoggedIn: true,
+            selectedMode: "open"
         };
     }
 
@@ -24,24 +29,23 @@ class Landing extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    {this.state.isLoggedIn ? <DashCustomerHeader/> :  <LandingHeader/> }
+                    <LandingHeader/>
                 </div>
                 <div>
                     <section>
                         <div className="row">
                             <div className="col-md-6 mb-3">
-                                {this.state.isLoggedIn ? <DashSideBar/> : <LandingCard/> }
-                                {/* <CreateAccount/>*/}
+                                <LandingCard/>
                             </div>
                             <div className="col-md-6 mb-3">
-                                {this.state.isLoggedIn ? <CustomerFunctions/> : <LoginRegister/>}
-                                {this.state.isLoggedIn ? null : <LandingTestimonials/> }
+                                <LoginRegister setIsLoggedIn={this.props.setIsLoggedIn}/>
+                                <LandingTestimonials/>
                             </div>
                         </div>
                     </section>
                 </div>
                 <div className="row my-5">
-                    {this.state.isLoggedIn ? "" : <LandingCardGroup/>}
+                    <LandingCardGroup/>
                 </div>
                 <div className="row">
                     <Footer/>

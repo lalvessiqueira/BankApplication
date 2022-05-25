@@ -19,15 +19,16 @@ class CreateAccount extends Component {
 
 
     componentDidMount() {
-        const id = localStorage.getItem("id");
-        const jsonId = { id: id };
         axios.get("http://localhost:8081/api/customer/username/" + this.state.username)
             .then((response) => {
                 this.setState({customerId: response.data.customerId});
+                console.log(this.state)
             })
             .catch((error) => {
                 console.log(error)
             });
+
+
     }
 
     changeHandler = e => {

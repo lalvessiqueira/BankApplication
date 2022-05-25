@@ -9,7 +9,7 @@ import {
 import './LoginRegister.css';
 import axios from "axios";
 
-export default function LoginRegister() {
+export default function LoginRegister({setIsLoggedIn}) {
 
     // Handle form variables, submission, POST request
     const [details, setDetails] = useState(
@@ -38,7 +38,8 @@ export default function LoginRegister() {
         axios.post('http://localhost:8081/api/customer/register', details).then(response => {
             console.log(response)
             window.localStorage.setItem("username",details.username)
-            window.location =  "/profile"
+            setIsLoggedIn(true)
+            // window.location =  "/profile"
         }).catch(error => {
             console.log(error)
             // window.location = "/infoMismatch"
@@ -52,7 +53,8 @@ export default function LoginRegister() {
             console.log(response.data)
             if (response.data === "good to go") {
                 window.localStorage.setItem("username",details.username)
-                window.location =  "/profile"
+                setIsLoggedIn(true)
+                // window.location =  "/profile"
             } else {
                 window.location = "/infoMismatch"
             }

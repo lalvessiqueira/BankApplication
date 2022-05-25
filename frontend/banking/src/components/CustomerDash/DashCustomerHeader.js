@@ -5,13 +5,16 @@ import {
     MDBBtn
 } from 'mdb-react-ui-kit';
 
-export default function DashCustomerHeader() {
+export default function DashCustomerHeader({setView, setIsLoggedIn}) {
+    const onButtonClick = (view) => {
+        setView(view)
+    }
     return (
         <MDBNavbar dark bgColor='dark' className="my-3 rounded-3" >
             <MDBContainer fluid>
                 <a className='navbar-brand' href='#'><i className="fas fa-university"/></a>
-                <a className='navbar-brand' href='#'>Profile</a>
-                <a className='navbar-brand' href='#'>Logout</a>
+                <a className='navbar-brand' href='#' onClick={()=>onButtonClick('6')}>Profile</a>
+                <a className='navbar-brand' href='#' onClick={() => setIsLoggedIn(false)}>Logout</a>
                 <a className='d-flex input-group w-auto' style={{color: "white"}}>
                     Welcome, HenrryWith2Rs
                 </a>
