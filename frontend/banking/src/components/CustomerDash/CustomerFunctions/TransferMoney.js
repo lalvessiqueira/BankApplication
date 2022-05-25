@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import {
     MDBBtn,
-    MDBCol, MDBContainer,
-    MDBDropdown,
-    MDBDropdownItem, MDBDropdownLink,
-    MDBDropdownMenu,
-    MDBDropdownToggle, MDBInput, MDBRadio, MDBRow,
+    MDBCol, MDBContainer, MDBInput, MDBRadio, MDBRow,
     MDBTable,
     MDBTableBody,
     MDBTableHead
