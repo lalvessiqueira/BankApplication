@@ -57,8 +57,6 @@ class Profile extends Component {
                     <MDBInput className='mb-4' style={{color: 'black'}}
                         label="Customer ID"
                         placeholder={this.state.customerId}
-                        readonly
-
                     />
                     <MDBInput className='mb-4'
                               type='text'

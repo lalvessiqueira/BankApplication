@@ -5,6 +5,11 @@ import DashSideBar from "./DashSideBar";
 import DashCustomerAcct from "./DashCustomerAcct";
 import Footer from "../Landing/Footer";
 import LandingCardGroup from "../Landing/LandingCardGroup";
+import Profile from "./CustomerFunctions/Profile";
+import CreateAccount from "./CustomerFunctions/CreateAccount";
+import AddBeneficiary from "./CustomerFunctions/AddBeneficiary";
+import RemoveBeneficiary from "./CustomerFunctions/RemoveBeneficiary";
+
 
 class DashCustomer extends Component {
     render() {
@@ -15,14 +20,13 @@ class DashCustomer extends Component {
                 </div>
                 <div>
                     <section>
-                        <div className="row justify-content-evenly">
+                        <div className="row justify-content-evenly ">
                             <div className="col-md-6 mb-3">
                                 <DashSideBar/>
                             </div>
-                            <div className="col-md-6 mb-3 text-center" >
+                            <div className="col mb-3 text-center" >
                                 <DashCustomerAcct/>
-                                <DashCustomerAcct/>
-                                <DashCustomerAcct/>
+                                <RemoveBeneficiary/>
                             </div>
                         </div>
                     </section>

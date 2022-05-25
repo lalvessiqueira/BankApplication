@@ -8,6 +8,8 @@ import Landing from "./components/Landing/Landing";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import Profile from "./components/CustomerDash/CustomerFunctions/Profile";
 import CreateAccount from "./components/CustomerDash/CustomerFunctions/CreateAccount";
+import DashCustomer from "./components/CustomerDash/DashCustomer";
+
 
 
 //TODO: WHEN LOGGED OUT:
