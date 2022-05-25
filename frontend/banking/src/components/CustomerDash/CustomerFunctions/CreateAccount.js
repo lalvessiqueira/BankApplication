@@ -9,7 +9,7 @@ class CreateAccount extends Component {
             username: window.localStorage.getItem("username"),
             customerId: "",
             accountBalance: 0.0,
-            accountType: "",
+            accountType: "CHECKING_ACCOUNT",
             approved: "no",
             dateOfCreation: "2022-05-24",
             accountStatus: "DISABLED"
@@ -27,8 +27,6 @@ class CreateAccount extends Component {
             .catch((error) => {
                 console.log(error)
             });
-
-
     }
 
     changeHandler = e => {

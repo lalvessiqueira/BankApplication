@@ -3,6 +3,7 @@ import CreateAccount from "./CreateAccount";
 import AddBeneficiary from "./AddBeneficiary";
 import RemoveBeneficiary from "./RemoveBeneficiary";
 import Profile from "./Profile";
+import TransferMoney from "./TransferMoney";
 
 export default function CustomerFunctions({view}) {
     return (
@@ -10,7 +11,7 @@ export default function CustomerFunctions({view}) {
             {view === '1' ? <CreateAccount/> : ''}
             {view === '2' ? <AddBeneficiary/> : ''}
             {view === '3' ? <RemoveBeneficiary/> : ''}
-            {/*{view === '4' ? <TransferMoney/> : ''}*/}
+            {view === '4' ? <TransferMoney/> : ''}
             {/*{view === '5' ? <ViewStatement/> : ''}*/}
             {view === '6' ? <Profile/> : ''}
         </div>
