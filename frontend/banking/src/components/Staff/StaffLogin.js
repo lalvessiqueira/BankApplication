@@ -10,7 +10,7 @@ class StaffLogin extends Component {
                 <MDBRow>
                     <LandingHeader/>
                 </MDBRow>
-                <MDBRow className='col-md-12 my-3 d-flex justify-content-evenly rounded-3 ' id='bg-glass'>
+                <MDBRow className='col-md-12 my-3 d-flex justify-content-evenly rounded-3 g-0' id='bg-glass'>
                     <MDBCol className='col-md-4 my-4'>
                         <h4>Log in as Staff</h4>
                         <form>
