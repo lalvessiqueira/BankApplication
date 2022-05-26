@@ -22,6 +22,7 @@ class AddBeneficiary extends Component {
                 console.log(this.state)
             })
             .catch((error) => {
+                console.log(this.state)
                 console.log(error)
             });
     }

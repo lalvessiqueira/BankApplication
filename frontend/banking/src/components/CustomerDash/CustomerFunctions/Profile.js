@@ -48,7 +48,6 @@ class Profile extends Component {
         axios.post('http://localhost:8081/api/customer/' + this.state.customerId, this.state).then(response => {
             console.log(response.data)
             window.localStorage.setItem("username",this.state.username)
-            window.location =  "/"
         }).catch(error => {
             console.log(error)
             // window.location =  "/infoMismatch"

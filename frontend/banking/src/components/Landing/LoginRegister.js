@@ -39,15 +39,15 @@ export default function LoginRegister({setIsLoggedIn}) {
         e.preventDefault()
         setDetails({...details, fullName: details.first + " " + details.last})
         console.log(details)
-        // axios.post('http://localhost:8081/api/customer/register', details).then(response => {
-        //     console.log(response)
-        //     window.localStorage.setItem("username",details.username)
-        //     setIsLoggedIn(true)
-        // }).catch(error => {
-        //     console.log(details)
-        //     console.log(error)
-        //     // window.location = "/infoMismatch"
-        // })
+        axios.post('http://localhost:8081/api/customer/register', details).then(response => {
+            console.log(response)
+            window.localStorage.setItem("username",details.username)
+            setIsLoggedIn(true)
+        }).catch(error => {
+            console.log(details)
+            console.log(error)
+            // window.location = "/infoMismatch"
+        })
     }
 
     const submitLogin = (e) =>{
@@ -147,11 +147,12 @@ export default function LoginRegister({setIsLoggedIn}) {
                                               setDetails({...details, username: e.target.value})}
                                 />
                                 <MDBInput className='mb-4 text-white'
-                                          type='text' label='Last Name'
+                                          type='text'
+                                          label='Full Name'
                                           name="fullName"
                                           value={details.fullName}
                                           onChange={(e) =>
-                                              setDetails({...details, first: e.target.value})}
+                                              setDetails({...details, fullName: e.target.value})}
                                 />
                                 <MDBInput className='mb-4 text-white'
                                           type='password'
