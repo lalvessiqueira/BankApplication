@@ -9,7 +9,7 @@ export default function SecQuesMismatch() {
             </div>
             <div className='row'>
                 <p style={{color: "black"}}>Username, Security Question, & Security Answer are <strong>mismatched!</strong></p>
-                <p><a href='#!'>Try again</a></p>
+                <p><a href='/'>Try again</a></p>
             </div>
         </div>
     );

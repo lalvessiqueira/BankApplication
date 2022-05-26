@@ -23,7 +23,13 @@ class Profile extends Component {
     componentDidMount() {
         axios.get("http://localhost:8081/api/customer/username/" + this.state.username)
             .then((response) => {
-                this.setState({customerId: response.data.customerId});
+                this.setState({customerId: response.data.customerId})
+                this.setState({fullName: response.data.fullName})
+                this.setState({phone: response.data.phone})
+                this.setState({ssn: response.data.ssn})
+                this.setState({stateID: response.data.stateID})
+                this.setState({secretQuestion: response.data.secretQuestion})
+                this.setState({secretAnswer: response.data.secretAnswer})
             })
             .catch((error) => {
                 console.log(error)
@@ -41,7 +47,7 @@ class Profile extends Component {
         axios.post('http://localhost:8081/api/customer/' + this.state.customerId, this.state).then(response => {
             console.log(response.data)
             window.localStorage.setItem("username",this.state.username)
-            window.location =  "/createAccount"
+            window.location =  "/"
         }).catch(error => {
             console.log(error)
             // window.location =  "/infoMismatch"
@@ -58,28 +64,28 @@ class Profile extends Component {
                     />
                     <MDBInput className='mb-4'
                               type='text'
-                              label='Full Name'
+                              placeholder="Full Name"
                               name="fullName"
                               value={this.state.fullName}
                               onChange={this.changeHandler}
                     />
                     <MDBInput className='mb-4'
                               type='text'
-                              label='Phone #'
+                              placeholder='Phone #'
                               name="phone"
                               value={this.state.phone}
                               onChange={this.changeHandler}
                     />
                     <MDBInput className='mb-4'
                               type='text'
-                              label='Social Security #'
+                              placeholder='Social Security #'
                               name="ssn"
                               value={this.state.ssn}
                               onChange={this.changeHandler}
                     />
                     <MDBInput className='mb-4'
                               type='text'
-                              label='stateID'
+                              placeholder='stateID'
                               name="stateID"
                               value={this.state.stateID}
                               onChange={this.changeHandler}
@@ -88,14 +94,15 @@ class Profile extends Component {
                         className="form-select mb-4"
                         aria-label="Security Questions"
                         name="secretQuestion"
-                        onChange={this.changeHandler}>
+                        onChange={this.changeHandler}
+                        value={this.state.secretQuestion}>
                         <option selected>Select Security Question</option>
                         <option value="Favorite Actor / Actress">Favorite Actor / Actress</option>
                         <option value="Name of first pet">Name of first pet</option>
                         <option value="Mother's Maiden Name">Mother's Maiden Name</option>
                     </select>
                     <MDBInput className='mb-4'
-                              type='text'
+                              type='password'
                               label='Enter Answer'
                               onChange={this.changeHandler}
                               name="secretAnswer"
