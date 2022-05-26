@@ -73,11 +73,12 @@ class AddBeneficiary extends Component {
 
                     <p>Select Account Type:</p>
                     <div className='d-flex justify-content-evenly mb-3 btn-outline-white rounded-pill'>
+
                         <MDBRadio name='accountType'
                                   label='Checking'
                                   defaultChecked
                                   value="CHECKING_ACCOUNT"
-                                  onChange={this.changeHandler}/>
+                                  onChange={this.changeHandler}/>&nbsp;&nbsp;
                         <MDBRadio name='accountType'
                                   label='Savings'
                                   value="SAVINGS_ACCOUNT"

@@ -39,11 +39,11 @@ export default function DashCustomer({setIsLoggedIn}) {
             </div>
             <div>
                 <section>
-                    <div className="row justify-content-evenly ">
+                    <div className="row">
                         <div className="col-md-6 mb-3">
                             <DashSideBar setView={setView}/>
                         </div>
-                        <div className="col mb-3 text-center" >
+                        <div className="col mb-3" >
                             { profileEmpty ? <ProfileWarning/> : ""}
                             { (view === '0') ? <DashCustomerAcct/> : <CustomerFunctions view={view} /> }
                         </div>

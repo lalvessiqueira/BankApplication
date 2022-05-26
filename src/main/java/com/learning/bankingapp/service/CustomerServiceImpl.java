@@ -36,7 +36,11 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		customerRepo.save(customer);
 		String[] Name = customer.getFullName().split("\\s");
-		customer.setCustomerId("C"+(Name[0].substring(0,1)+Name[1].substring(0,1)).toUpperCase()+"_"+customer.getUid());
+		if(Name.length>1)
+			customer.setCustomerId("C"+(Name[0].substring(0,1)+Name[1].substring(0,1)).toUpperCase()+"_"+customer.getUid());
+		else
+			customer.setCustomerId("C"+(Name[0].substring(0,1)+Name[0].substring(1,2)).toUpperCase()+"_"+customer.getUid());
+
 		customerRepo.save(customer);
 	}
 

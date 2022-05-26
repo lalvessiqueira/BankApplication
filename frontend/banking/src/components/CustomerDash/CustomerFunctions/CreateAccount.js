@@ -47,9 +47,8 @@ class CreateAccount extends Component {
     render() {
         return (
                 <div className='container rounded-3 d-flex justify-content-center' id='bg-glass'>
-                    <form onSubmit={this.submitHandler} className='py-2'>
-                        <p className='text-uppercase fw-bold fs-4'>Create Account</p>
-                        <MDBInputGroup textBefore='$' className='mb-4 d-flex'>
+                    <form onSubmit={this.submitHandler} className='my-4'>
+                        <MDBInputGroup textBefore='$' className='mb-4'>
                             <input
                                 type='text'
                                 className='form-control'

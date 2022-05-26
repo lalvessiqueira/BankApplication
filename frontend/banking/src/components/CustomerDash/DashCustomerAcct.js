@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {
     MDBBtn,
-    MDBCard,
-    MDBCardBody,
-    MDBCardText,
     MDBCol, MDBContainer,
     MDBRow,
     MDBSwitch
@@ -12,23 +9,26 @@ import {
 class DashCustomerAcct extends Component {
     render() {
         return (
-            <MDBContainer>
-                <MDBCard id='bg-glass' className='mb-3'>
-                    <MDBCardBody>
-                        <MDBRow className='mb-3'>
-                            <MDBCardText className='pe-5 mb-1'>Account Type: </MDBCardText>
-                            <MDBCardText className='pe-4'>Account Balance: </MDBCardText>
-                        </MDBRow>
-                        <MDBRow>
-                            <MDBCol size='auto'>
-                                <MDBSwitch label='Disable/Enable' defaultChecked />
-                            </MDBCol>
-                            <MDBCol>
-                                <MDBBtn type='submit' size='sm'>View More</MDBBtn>
-                            </MDBCol>
-                        </MDBRow>
-                    </MDBCardBody>
-                </MDBCard>
+            <MDBContainer id='bg-glass' className='py-3 rounded-5 col-10'>
+                <MDBRow className='mb-2'>
+                    <MDBCol>
+                            Account Type:
+                    </MDBCol>
+                </MDBRow>
+
+                <MDBRow className='mb-2'>
+                    <MDBCol>
+                        Balance:
+                    </MDBCol>
+                </MDBRow>
+                <MDBRow className='d-flex justify-content-center mt-4'>
+                    <MDBCol className='col-5'>
+                        <MDBSwitch label='Disable/Enable' defaultChecked />
+                    </MDBCol>
+                    <MDBCol className='col-4'>
+                        <MDBBtn type='submit' size='sm'>View More</MDBBtn>
+                    </MDBCol>
+                </MDBRow>
             </MDBContainer>
         );
     }
