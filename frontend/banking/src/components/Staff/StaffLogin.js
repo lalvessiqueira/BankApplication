@@ -6,7 +6,7 @@ import './StaffDashboard.css';
 class StaffLogin extends Component {
     render() {
         return (
-            <MDBContainer className='rounded-3 btn-outline-white'>
+            <MDBContainer className='rounded-3'>
                 <MDBRow>
                     <LandingHeader/>
                 </MDBRow>

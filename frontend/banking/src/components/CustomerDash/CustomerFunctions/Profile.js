@@ -27,9 +27,9 @@ class Profile extends Component {
                 this.setState({customerId: response.data.customerId})
                 this.setState(response.data.fullName === null ? "" : {fullName: response.data.fullName})
                 this.setState(response.data.phone === null ? "" : {phone: response.data.phone})
-                this.setState( response.data.ssn=== null ? "" : {ssn: response.data.ssn})
+                this.setState(response.data.ssn=== null ? "" : {ssn: response.data.ssn})
                 this.setState(response.data.stateID === null ? "" : {stateID: response.data.stateID})
-                this.setState( response.data.secretQuestion === null ? "" : {secretQuestion: response.data.secretQuestion})
+                this.setState(response.data.secretQuestion === null ? "" : {secretQuestion: response.data.secretQuestion})
                 this.setState(response.data.secretAnswer === null ? "" : {secretAnswer: response.data.secretAnswer})
             })
             .catch((error) => {
@@ -56,7 +56,7 @@ class Profile extends Component {
 
     render() {
         return (
-            <div className='container rounded-3' id='bg-glass'>
+            <div className='container rounded-3 my-2' id='bg-glass'>
                 <form onSubmit={this.submitHandler} className='py-2'>
                     <MDBInput className='mb-4' style={{color: 'black'}}
                         label="Customer ID"
