@@ -6,13 +6,6 @@ import LoginRegister from "./LoginRegister";
 import Footer from "./Footer";
 import LandingCardGroup from "./LandingCardGroup";
 import LandingTestimonials from "./LandingTestimonials";
-import DashCustomerHeader from "../CustomerDash/DashCustomerHeader";
-import DashSideBar from "../CustomerDash/DashSideBar";
-import CustomerFunctions from "../CustomerDash/CustomerFunctions/CustomerFunctions";
-
-// export default function Landing() {
-//     const[]
-// }
 
 class Landing extends Component {
     constructor(props) {

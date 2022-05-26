@@ -9,6 +9,7 @@ import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import Profile from "./components/CustomerDash/CustomerFunctions/Profile";
 import CreateAccount from "./components/CustomerDash/CustomerFunctions/CreateAccount";
 import DashCustomer from "./components/CustomerDash/DashCustomer";
+import StaffLogin from "./components/Staff/StaffLogin";
 
 
 
@@ -28,6 +29,11 @@ function App() {
                     <Route path="/infoMismatch" element={<SecQuesMismatch/>}/>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/createAccount" element={<CreateAccount/>}/>
+
+                    <Route path="/DashCustomer" element={<DashCustomer/>}/>
+                    <Route path="/staffLogin" element={<StaffLogin/>}/>
+
+
                 </Routes>
             </BrowserRouter>
         </React.StrictMode>
