@@ -23,19 +23,42 @@ export default function TransferMoney() {
             accountBalance: 0,
             accountNumber: 0,
             accountType: "",
-            amount: 0,
+            amount: "",
             reason: ""
         }
     );
 
-    const isSelected = (account) => {
-        if (account.accountType === "CHECKING_ACCOUNT") {
-            setFrom({...from, accountType: account.accountType})
+    const isSelected = (account, toFrom) => {
+        console.log(toFrom)
+        if (toFrom === "from") {
+            if (account.accountType === "CHECKING_ACCOUNT") {
+                setFrom({...from,
+                    accountType: account.accountType,
+                    accountBalance: account.accountBalance,
+                    accountNumber: account.accountNumber
+                })
+            } else {
+                setFrom({
+                    ...from,
+                    accountType: "SAVINGS_ACCOUNT",
+                    accountBalance: account.accountBalance,
+                    accountNumber: account.accountNumber
+                })
+            }
         } else {
-            setFrom({...from,
-                accountType: "SAVINGS_ACCOUNT",
-                accountBalance: account.accountType,
-                accountNumber: account.accountNumber})
+            if (account.accountType === "CHECKING_ACCOUNT") {
+                setTo({...to,
+                    accountType: account.accountType,
+                    accountBalance: account.accountBalance,
+                    accountNumber: account.accountNumber
+                })
+            } else {
+                setTo({...to,
+                    accountType: "SAVINGS_ACCOUNT",
+                    accountBalance: account.accountBalance,
+                    accountNumber: account.accountNumber
+                })
+            }
         }
     }
 
@@ -56,19 +79,19 @@ export default function TransferMoney() {
         const transfer = [from.accountNumber, to.accountNumber, to.amount, to.reason]
         e.preventDefault()
         if (from.accountType !== to.accountType) {
-            console.log("from:")
-            console.log(from)
-            console.log("to:")
-            console.log(to)
+            console.log(transfer)
+            // console.log("from:")
+            // console.log(from)
+            // console.log("to:")
+            // console.log(to)
+            axios.post('http://localhost:8081/api/customer/transfer', transfer).then(response => {
+                console.log(response.data)
+            }).catch(error => {
+                console.log(error)
+            })
         } else {
             alert("Same account?")
         }
-
-        // axios.post('http://localhost:8081/api/customer/transfer', transfer).then(response => {
-        //     console.log(response.data)
-        // }).catch(error => {
-        //     console.log(error)
-        // })
     }
 
     return (
@@ -93,9 +116,9 @@ export default function TransferMoney() {
                                         <td>USD: {account.accountBalance}</td>
                                         <td>{account.accountType === "CHECKING_ACCOUNT" ? "CA" : "SB"}</td>
                                         <td>
-                                            <MDBRadio name='accountRadio'
+                                            <MDBRadio name='fromAccountRadio'
                                                       value={account.accountType}
-                                                      onChange={ ()=> {isSelected(account.accountType)} }
+                                                      onChange={ ()=> {isSelected(account, "from")} }
                                             />
                                         </td>
                                     </tr>
@@ -124,9 +147,9 @@ export default function TransferMoney() {
                                         <td>USD: {account.accountBalance}</td>
                                         <td>{account.accountType === "CHECKING_ACCOUNT" ? "CA" : "SB"}</td>
                                         <td>
-                                            <MDBRadio name='accountRadio'
+                                            <MDBRadio name='toAccountRadio'
                                                       value={account.accountType}
-                                                      onChange={ ()=> {isSelected(account.accountType)} }
+                                                      onChange={ ()=> {isSelected(account, "to")} }
                                             />
                                         </td>
                                     </tr>
