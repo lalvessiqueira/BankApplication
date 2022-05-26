@@ -15,8 +15,10 @@ export default function LoginRegister({setIsLoggedIn}) {
     const [details, setDetails] = useState(
         {
             username : '',
-            fullName : '',
-            password : ''
+            first: '',
+            last: '',
+            fullName : "",
+            password : '',
         }
     );
 
@@ -35,14 +37,17 @@ export default function LoginRegister({setIsLoggedIn}) {
      */
     const submitRegister = (e) =>{
         e.preventDefault()
-        axios.post('http://localhost:8081/api/customer/register', details).then(response => {
-            console.log(response)
-            window.localStorage.setItem("username",details.username)
-            setIsLoggedIn(response.data)
-        }).catch(error => {
-            console.log(error)
-            // window.location = "/infoMismatch"
-        })
+        setDetails({...details, fullName: details.first + " " + details.last})
+        console.log(details)
+        // axios.post('http://localhost:8081/api/customer/register', details).then(response => {
+        //     console.log(response)
+        //     window.localStorage.setItem("username",details.username)
+        //     setIsLoggedIn(true)
+        // }).catch(error => {
+        //     console.log(details)
+        //     console.log(error)
+        //     // window.location = "/infoMismatch"
+        // })
     }
 
     const submitLogin = (e) =>{
@@ -52,7 +57,6 @@ export default function LoginRegister({setIsLoggedIn}) {
             console.log(response.data)
             window.localStorage.setItem("username",details.username)
             setIsLoggedIn(true)
-
         }).catch(error => {
             console.log(error)
             window.location = "/infoMismatch"
@@ -143,11 +147,11 @@ export default function LoginRegister({setIsLoggedIn}) {
                                               setDetails({...details, username: e.target.value})}
                                 />
                                 <MDBInput className='mb-4 text-white'
-                                          type='text' label='Full Name'
+                                          type='text' label='Last Name'
                                           name="fullName"
                                           value={details.fullName}
                                           onChange={(e) =>
-                                              setDetails({...details, fullName: e.target.value})}
+                                              setDetails({...details, first: e.target.value})}
                                 />
                                 <MDBInput className='mb-4 text-white'
                                           type='password'
@@ -157,8 +161,6 @@ export default function LoginRegister({setIsLoggedIn}) {
                                           onChange={(e) =>
                                               setDetails({...details, password: e.target.value})}
                                 />
-
-
                                 <MDBCheckbox
                                     wrapperClass='d-flex justify-content-center mb-4'
                                     id='form8Example6'

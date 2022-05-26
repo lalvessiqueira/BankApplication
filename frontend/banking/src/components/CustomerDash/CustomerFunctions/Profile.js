@@ -23,13 +23,14 @@ class Profile extends Component {
     componentDidMount() {
         axios.get("http://localhost:8081/api/customer/username/" + this.state.username)
             .then((response) => {
+                //convert into loop
                 this.setState({customerId: response.data.customerId})
-                this.setState({fullName: response.data.fullName})
-                this.setState({phone: response.data.phone})
-                this.setState({ssn: response.data.ssn})
-                this.setState({stateID: response.data.stateID})
-                this.setState({secretQuestion: response.data.secretQuestion})
-                this.setState({secretAnswer: response.data.secretAnswer})
+                this.setState(response.data.fullName === null ? "" : {fullName: response.data.fullName})
+                this.setState(response.data.phone === null ? "" : {phone: response.data.phone})
+                this.setState( response.data.ssn=== null ? "" : {ssn: response.data.ssn})
+                this.setState(response.data.stateID === null ? "" : {stateID: response.data.stateID})
+                this.setState( response.data.secretQuestion === null ? "" : {secretQuestion: response.data.secretQuestion})
+                this.setState(response.data.secretAnswer === null ? "" : {secretAnswer: response.data.secretAnswer})
             })
             .catch((error) => {
                 console.log(error)
@@ -63,6 +64,7 @@ class Profile extends Component {
                         placeholder={this.state.customerId}
                     />
                     <MDBInput className='mb-4'
+                              label='Full Name'
                               type='text'
                               placeholder="Full Name"
                               name="fullName"
@@ -71,6 +73,7 @@ class Profile extends Component {
                     />
                     <MDBInput className='mb-4'
                               type='text'
+                              label='Phone #'
                               placeholder='Phone #'
                               name="phone"
                               value={this.state.phone}
@@ -78,6 +81,7 @@ class Profile extends Component {
                     />
                     <MDBInput className='mb-4'
                               type='text'
+                              label='SSN'
                               placeholder='Social Security #'
                               name="ssn"
                               value={this.state.ssn}
@@ -85,6 +89,7 @@ class Profile extends Component {
                     />
                     <MDBInput className='mb-4'
                               type='text'
+                              label='State ID'
                               placeholder='stateID'
                               name="stateID"
                               value={this.state.stateID}

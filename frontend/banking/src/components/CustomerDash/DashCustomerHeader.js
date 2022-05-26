@@ -16,7 +16,7 @@ export default function DashCustomerHeader({setView, setIsLoggedIn}) {
                 <a className='navbar-brand' href='#' onClick={()=>onButtonClick('6')}>Profile</a>
                 <a className='navbar-brand' href='#' onClick={() => setIsLoggedIn(false)}>Logout</a>
                 <a className='d-flex input-group w-auto' style={{color: "white"}}>
-                    Welcome, HenrryWith2Rs
+                    Welcome, {localStorage.getItem("username")}
                 </a>
             </MDBContainer>
         </MDBNavbar>

@@ -15,7 +15,7 @@ import DashCustomer from "./components/CustomerDash/DashCustomer";
 //TODO: WHEN LOGGED OUT:
 //localStorage.removeItem(key);
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return (
         <React.StrictMode>
