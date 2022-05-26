@@ -10,17 +10,54 @@ import {
     MDBTableBody,
     MDBTableHead
 } from "mdb-react-ui-kit";
+import axios from "axios";
 
 class ViewStatement extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            accounts: [],
+            accountNumber: "",
+            accountBalance: "",
+            transactionDate: "",
+            reference: "",
+            amount: 0,
+            type: "",
+            transactionBy: "Customer",
+            accNo: ""
+        };
+    }
+
+    componentDidMount() {
+        axios.get("http://localhost:8081/api/customer/username/" + localStorage.getItem("username"))
+            .then((response) => {
+                // this.setState({customerId: response.data.customerId})
+                axios.get("http://localhost:8081/api/customer/" + response.data.customerId + "/account")
+                    .then((response) => {
+                        console.log(response.data)
+                        this.setState({accountNumber: response.data[0].accountNumber})
+                        this.setState({accountBalance: response.data[0].accountBalance})
+                        this.setState({accounts: response.data[0]})
+                    })
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     render() {
         return (
             <MDBContainer className='rounded-3 py-3' id='bg-glass'>
-                <form>
+                <form onSubmit={(e) => {
+                    e.preventDefault()
+                    console.log("this is the state")
+                    console.log(this.state)}
+                }>
                     <MDBRow className='d-flex justify-content-center my-3'>
                         <MDBCol className='col-4'>
                             <select className="form-select">
-                                <option selected>To Account:</option>
-                                <option value="Favorite Actor / Actress">Favorite Actor / Actress</option>
+                                <option selected>CHECKINGS</option>
+                                {/*<option value="Favorite Actor / Actress">Favorite Actor / Actress</option>*/}
                             </select>
                         </MDBCol>
                         <MDBCol className='col-4'>
@@ -31,10 +68,10 @@ class ViewStatement extends Component {
 
                 <MDBRow className='d-flex justify-content-center my-3'>
                     <MDBCol className='col-4'>
-                        <label>AC No: HB_159753</label>
+                        <label>AC No: {this.state.accountNumber}</label>
                     </MDBCol>
                     <MDBCol className='col-4'>
-                        <label>Balance: $123,456</label>
+                        <label>Balance: ${this.state.accountBalance}</label>
                     </MDBCol>
                 </MDBRow>
 
@@ -51,18 +88,14 @@ class ViewStatement extends Component {
                                 </tr>
                             </MDBTableHead>
                             <MDBTableBody>
-                                <tr>
-                                    <td>5-25-2022</td>
-                                    <td>222-trnsfr-comp</td>
-                                    <td>$420.69</td>
-                                    <td>Cr</td>
-                                </tr>
-                                <tr>
-                                    <td>6-10-2022</td>
-                                    <td>459-credit-card</td>
-                                    <td>$642.35</td>
-                                    <td>Db</td>
-                                </tr>
+                                {(this.state.accounts.transactions)?.map( info =>
+                                    <tr>
+                                        <td>{info.transactionDate.substring(0,10)}</td>
+                                        <td>{info.reference}</td>
+                                        <td>${info.amount}</td>
+                                        <td>{info.type === "CREDIT" ? "CR" : "DB"}</td>
+                                    </tr>
+                                )}
                             </MDBTableBody>
                         </MDBTable>
                     </MDBCol>
