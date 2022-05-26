@@ -106,17 +106,48 @@ export default function TransferMoney() {
                 </MDBRow>
 
                 <MDBRow className='d-flex justify-content-center my-3'>
-                    <MDBCol className='col-4'>
-                        <select className="form-select"
-                                name="accountType"
-                                value={to.accountType}
-                                onChange={(e) =>
-                                    setTo({...to, accountType: e.target.value})}>
-                            <option selected>To Account:</option>
-                            <option value="CHECKING_ACCOUNT">CHECKING</option>
-                            <option value="SAVINGS_ACCOUNT">SAVINGS</option>
-                        </select>
+                    <MDBCol className=''>
+                        <label className='my-3'>To Account:</label>
+                        <MDBTable>
+                            <MDBTableHead dark>
+                                <tr>
+                                    <th scope='col'>Account #</th>
+                                    <th scope='col'>Balance</th>
+                                    <th scope='col'>Account Type</th>
+                                    <th scope='col'>Select</th>
+                                </tr>
+                            </MDBTableHead>
+                            <MDBTableBody>
+                                {accounts.accounts?.map(account =>
+                                    <tr>
+                                        <td>{account.accountNumber}</td>
+                                        <td>USD: {account.accountBalance}</td>
+                                        <td>{account.accountType === "CHECKING_ACCOUNT" ? "CA" : "SB"}</td>
+                                        <td>
+                                            <MDBRadio name='accountRadio'
+                                                      value={account.accountType}
+                                                      onChange={ ()=> {isSelected(account.accountType)} }
+                                            />
+                                        </td>
+                                    </tr>
+                                )}
+                            </MDBTableBody>
+                        </MDBTable>
                     </MDBCol>
+
+                    {/*<MDBCol className='col-4'>*/}
+                    {/*    <select className="form-select"*/}
+                    {/*            name="accountType"*/}
+                    {/*            value={to.accountType}*/}
+                    {/*            onChange={(e) =>*/}
+                    {/*                setTo({...to, accountType: e.target.value})}>*/}
+                    {/*        <option selected>To Account:</option>*/}
+                    {/*        <option value="CHECKING_ACCOUNT">CHECKING</option>*/}
+                    {/*        <option value="SAVINGS_ACCOUNT">SAVINGS</option>*/}
+                    {/*    </select>*/}
+                    {/*</MDBCol>*/}
+                </MDBRow>
+                <MDBRow className='d-flex justify-content-center my-3'>
                     <MDBCol className='col-4'>
                         <MDBInput label='Enter Amount'
                                   name="amount"
@@ -125,8 +156,6 @@ export default function TransferMoney() {
                                       setTo({...to, amount: e.target.value})}
                         />
                     </MDBCol>
-                </MDBRow>
-                <MDBRow className='d-flex justify-content-center my-3'>
                     <MDBCol className='col-8'>
                         <MDBInput label='Include Comment'
                                   name="reason"
