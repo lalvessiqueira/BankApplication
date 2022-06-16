@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learning.bankingapp.Repo.CustomerRepo;
-import com.learning.bankingapp.Repo.StaffRepo;
+import com.learning.bankingapp.repo.StaffRepo;
 import com.learning.bankingapp.Repo.UserRepository;
 import com.learning.bankingapp.entity.Customer;
 import com.learning.bankingapp.entity.Staff;

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.learning.bankingapp.Repo.AccountRepo;
 import com.learning.bankingapp.Repo.BeneficiaryRepo;
 import com.learning.bankingapp.Repo.CustomerRepo;
-import com.learning.bankingapp.Repo.StaffRepo;
+import com.learning.bankingapp.repo.StaffRepo;
 import com.learning.bankingapp.entity.Account;
 import com.learning.bankingapp.entity.Beneficiary;
 import com.learning.bankingapp.entity.Customer;
@@ -194,7 +194,6 @@ public class StaffServiceImpl implements StaffService {
 			throw new Exception();
 		
 	}
-	
-	
+
 
 }

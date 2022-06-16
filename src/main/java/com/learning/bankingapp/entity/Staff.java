@@ -16,7 +16,7 @@ import org.hibernate.annotations.GenerationTime;
 @Entity
 @Table(name = "Staff", uniqueConstraints = @UniqueConstraint(columnNames = {"staffId"} ))
 //@DiscriminatorValue (value = "Staff")
-public class Staff extends User{
+public class Staff extends User {
 	
 	private String staffId;
     private EnableStatus status=EnableStatus.DISABLED;

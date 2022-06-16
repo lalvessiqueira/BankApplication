@@ -1,41 +1,125 @@
-import React, {Component} from 'react';
-import {MDBBtn, MDBCheckbox, MDBCol, MDBContainer, MDBInput, MDBRow} from "mdb-react-ui-kit";
+import React, {useState} from 'react';
+import {
+    MDBBtn,
+    MDBCheckbox,
+    MDBCol,
+    MDBContainer, MDBIcon,
+    MDBInput,
+    MDBRow,
+    MDBTabs, MDBTabsContent,
+    MDBTabsItem,
+    MDBTabsLink, MDBTabsPane
+} from "mdb-react-ui-kit";
 import LandingHeader from "../Landing/LandingHeader";
 import './StaffDashboard.css';
 
-class StaffLogin extends Component {
-    render() {
+export default function StaffLogin()  {
+    const [loginOrRegister, setLoginOrRegister] = useState('login');
+    const handleLoginOrRegister = (value: string) => {
+        if (value === loginOrRegister) {
+            return;
+        }
+        setLoginOrRegister(value);
+    };
+
         return (
             <MDBContainer className='rounded-3'>
                 <MDBRow>
                     <LandingHeader/>
                 </MDBRow>
                 <MDBRow className='col-md-12 my-3 d-flex justify-content-evenly rounded-3 g-0' id='bg-glass'>
-                    <MDBCol className='col-md-4 my-4'>
-                        <h4>Log in as Staff</h4>
-                        <form>
-                            <MDBInput className='mb-4' type='email' label='Username' />
-                            <MDBInput className='mb-4' type='password' label='Password' />
+                    <MDBCol className='col-md-4 my-4' >
 
-                            <MDBRow className='mb-4'>
-                                <MDBCol className='d-flex justify-content-center'>
-                                    <MDBCheckbox label='Remember me' defaultChecked />
-                                </MDBCol>
-                                <MDBCol>
-                                    <a href='#!'>Forgot password?</a>
-                                </MDBCol>
-                            </MDBRow>
+                        <MDBTabs pills justify className='mb-3'>
+                            <MDBTabsItem>
+                                <MDBTabsLink onClick={() => handleLoginOrRegister('login')} active={loginOrRegister === 'login'}>
+                                    LOGIN
+                                </MDBTabsLink>
+                            </MDBTabsItem>
+                            <MDBTabsItem>
+                                <MDBTabsLink onClick={() => handleLoginOrRegister('register')} active={loginOrRegister === 'register'}>
+                                    REGISTER
+                                </MDBTabsLink>
+                            </MDBTabsItem>
+                        </MDBTabs>
 
-                            <MDBBtn type='submit' block>
-                                Sign in
-                            </MDBBtn>
-                        </form>
+                        <MDBTabsContent>
+                            <MDBTabsPane show={loginOrRegister === 'login'}>
+                                <h4>Log in as Staff</h4>
+                                <form>
+                                    <MDBInput className='mb-4 text-white'
+                                              type='text'
+                                              label='Username'
+                                              name='username'
+                                              // value={details.username}
+                                              // onChange={(e) =>
+                                              //     setDetails({...details, username: e.target.value})}
+                                    />
+                                    <MDBInput className='mb-4 text-white'
+                                              type='password'
+                                              label='Password'
+                                              name="password"
+                                              // value={details.password}
+                                              // onChange={(e) =>
+                                              //     setDetails({...details, password: e.target.value})}
+                                    />
+
+                                    <MDBRow className='mb-4'>
+                                        <MDBCol className='d-flex justify-content-center'>
+                                            <MDBCheckbox label='Remember me' defaultChecked />
+                                        </MDBCol>
+                                        <MDBCol>
+                                            <a href='/questionAuth'>Forgot password?</a>
+                                        </MDBCol>
+                                    </MDBRow>
+
+                                    <MDBBtn type='submit' className='mb-4'>
+                                        Log in
+                                    </MDBBtn>
+                                </form>
+                            </MDBTabsPane>
+                            <MDBTabsPane show={loginOrRegister === 'register'}>
+                                <h4>Register Staff</h4>
+                                <form>
+                                    <MDBInput className='mb-4 text-white'
+                                              type='text'
+                                              label='Username'
+                                              name='username'
+                                              // value={details.username}
+                                              // onChange={(e) =>
+                                              //     setDetails({...details, username: e.target.value})}
+                                    />
+                                    <MDBInput className='mb-4 text-white'
+                                              type='text'
+                                              label='Full Name'
+                                              name="fullName"
+                                              // value={details.fullName}
+                                              // onChange={(e) =>
+                                              //     setDetails({...details, fullName: e.target.value})}
+                                    />
+                                    <MDBInput className='mb-4 text-white'
+                                              type='password'
+                                              label='Password'
+                                              name="password"
+                                              // value={details.password}
+                                              // onChange={(e) =>
+                                              //     setDetails({...details, password: e.target.value})}
+                                    />
+                                    <MDBCheckbox
+                                        wrapperClass='d-flex justify-content-center mb-4'
+                                        id='form8Example6'
+                                        label='I have read and agree to the terms'
+                                        defaultChecked
+                                    />
+
+                                    <MDBBtn type='submit' className='mb-4'>
+                                        Register
+                                    </MDBBtn>
+                                </form>
+                            </MDBTabsPane>
+                        </MDBTabsContent>
                     </MDBCol>
                 </MDBRow>
-
             </MDBContainer>
         );
-    }
 }
-
-export default StaffLogin;
