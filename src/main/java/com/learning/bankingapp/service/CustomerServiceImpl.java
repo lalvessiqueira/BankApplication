@@ -65,8 +65,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		Customer customer = customerRepo.findBycustomerId(CustId);
 		Account account2= new Account();
-	
-			
+
 		account2.setAccountType(account1.getAccountType());
 		account2.setAccountBalance(account1.getAccountBalance());
 		account2.setDateOfCreation(currentDate);
@@ -75,15 +74,15 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		customer.getAccounts().add(account2);
 				
-		 Long N = Long.parseLong(customer.getUid());
-		 N = N*100+111+customer.getAccounts().size();
-	     String number= String.format("%09d", N);
+		Long N = Long.parseLong(customer.getUid());
+		N = N*100+111+customer.getAccounts().size();
+		String number= String.format("%09d", N);
 		
 		account2.setAccountNumber(number);
 		
 		customerRepo.save(customer);
 	
-	 return account2;
+	 	return account2;
 	}
 	
 

@@ -29,8 +29,6 @@ public class Customer extends User
     private String secretQuestion=null;
     private String secretAnswer=null;
     private EnableStatus status=EnableStatus.DISABLED;
-   
-
 
     public Customer(String username, String fullName, String password, UserType usertype) {
 		super(username, fullName, password, usertype);

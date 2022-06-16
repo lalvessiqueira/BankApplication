@@ -14,11 +14,11 @@ export default function LoginRegister({setIsLoggedIn}) {
     // Handle form variables, submission, POST request
     const [details, setDetails] = useState(
         {
-            username : '',
-            first: '',
-            last: '',
-            fullName : "",
-            password : '',
+            name : '',
+            breed: '',
+            age: '',
+            sex : "",
+            photo : '',
         }
     );
 
