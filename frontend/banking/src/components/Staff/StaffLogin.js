@@ -51,17 +51,13 @@ export default function StaffLogin()  {
                                               type='text'
                                               label='Username'
                                               name='username'
-                                              // value={details.username}
-                                              // onChange={(e) =>
-                                              //     setDetails({...details, username: e.target.value})}
+                                              // value={}
+                                              // onChange={}
                                     />
                                     <MDBInput className='mb-4 text-white'
                                               type='password'
                                               label='Password'
                                               name="password"
-                                              // value={details.password}
-                                              // onChange={(e) =>
-                                              //     setDetails({...details, password: e.target.value})}
                                     />
 
                                     <MDBRow className='mb-4'>
@@ -85,9 +81,6 @@ export default function StaffLogin()  {
                                               type='text'
                                               label='Username'
                                               name='username'
-                                              // value={details.username}
-                                              // onChange={(e) =>
-                                              //     setDetails({...details, username: e.target.value})}
                                     />
                                     <MDBInput className='mb-4 text-white'
                                               type='text'
